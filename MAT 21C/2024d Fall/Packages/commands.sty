@@ -1,0 +1,39 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{commands}[2024/09/25 Common commands for commands.sty]
+
+%% \eu
+%% \eu^{}
+\newcommand*{\eu}{e}
+%% \iu
+\newcommand*{\iu}{i}
+
+%% \real
+\newcommand*{\real}{\mathbb{R}}
+%% \nat
+\newcommand*{\nat}{\mathbb{N}}
+
+\@ifpackageloaded{derivative}{
+    %% \Pdv{}{}
+    \newcommand*{\Pdv}{\pdv*[fun]}
+    %% \Odv{}{}
+    \newcommand*{\Odv}{\odv*[fun]}
+}{}
+
+\begingroup
+\catcode`|=\active
+\gdef\@changevert{\def|{\:\delimsize\vert\:}}
+\endgroup
+\@ifpackageloaded{mathtools}{
+    \newcommand\DeclarePairedDelimiterV[3]{\expandafter\DeclarePairedDelimiterX\csname#1\endcsname[1]#2#3{\mathcode`|="8000\@changevert ##1}}
+
+    %% \set{arg}
+    \DeclarePairedDelimiterV{set}{\{}{\}}
+}{}
+
+\@ifpackageloaded{mathtools}{
+    %% \abs{arg}
+    \DeclarePairedDelimiter\abs{\lvert}{\rvert}
+
+    %% \veccomp{arg}
+    \DeclarePairedDelimiter\veccomp{\langle}{\rangle}
+}{}
