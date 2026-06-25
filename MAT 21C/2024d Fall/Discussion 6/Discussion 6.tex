@@ -1,0 +1,52 @@
+\documentclass{discussion}
+
+\usepackage{amsmath, amsthm, amssymb}
+% \usepackage{xcolor, hyperref, cleveref}
+\usepackage{mathtools}
+\usepackage{derivative}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{tasks}
+\usepackage{mdframed}
+\usepackage{interval}
+\usepackage{commands}
+
+\settasks{
+    label-width = 13.9917pt,
+    item-indent = 17.64131pt,
+    after-item-skip = 80pt,
+    column-sep = 20pt,
+    label = (\arabic*)
+}
+
+\discussion{6}
+\author{Sections B04 and B06}
+\date{Fall 2024}
+
+\begin{document}
+
+\begin{question}
+    Find a vector \(\vec{v}\in \real^3\) that satisfies each of the following conditions.
+    \begin{tasks}(2)
+        \task \(\vec{v}\) points from \((0, 1, 2)\) to \((1, 1, 1)\).
+        \task \(\vec{v}\) is the projection of \(\veccomp{1, 2, 3}\) onto \(\veccomp{1, 1, 1}\).
+        \task \(\vec{v}\) is a unit vector in the plane \(x - 2y + z = 0\).
+        \task \(\vec{v}\neq 0\) is in the intersection of the plane \(x - 2y + z = 0\) and the plane \(2x + y - z = 0\).
+        \task \(\vec{v}\neq 0\) is a vector orthogonal to \(\veccomp{1, -2, 1}\) and to \(\veccomp{2, 1, -1}\).
+        \task \(\vec{v}\neq 0\) is a vector in the plane \(x + y + 2z = 0\) and is orthogonal to \(\veccomp{1, -1, 1}\).
+        \task \(\vec{v}\) is the projection of \(\veccomp{1, 2, 3}\) onto the plane \(x + y + z = 0\).
+        \task (challenge) \(\vec{v}\) is a unit vector in the plane \(z = 0\) and forms an angle of \(\frac{\pi}{4}\) with \(\veccomp{3, 4, 5}\).
+    \end{tasks}
+\end{question}
+
+\vspace{70pt}
+
+\begin{question}
+    Find the area or volume of the following shapes in \(\real^3\).
+    \begin{tasks}(1)
+        \task The area of the triangle with vertices \((0, 1, 0)\), \((1, 1, -1)\), and \((1, 2, 3)\).
+        \task The volume of the parallelepiped with a vertex at the origin with adjacent vertices at \((2, 1, -1)\), \((1, 1, 0)\), \((1, 1, 1)\).
+    \end{tasks}
+\end{question}
+
+\end{document}

@@ -1,0 +1,58 @@
+\documentclass{discussion}
+
+\usepackage{amsmath, amsthm, amssymb}
+% \usepackage{xcolor, hyperref, cleveref}
+\usepackage{mathtools}
+\usepackage{derivative}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{tasks}
+\usepackage{mdframed}
+\usepackage{commands}
+
+\settasks{
+    label-width = 13.99168pt,
+    item-indent = 17.6413pt,
+    after-item-skip = 40pt,
+}
+
+\discussion{4}
+\author{Sections B04 and B06}
+\date{Fall 2024}
+
+\begin{document}
+
+\section{Power series}
+
+\begin{question}
+    Determine the interval of convergence of the following power series.
+    \begin{tasks}[label={\arabic*.}](2)
+        \task \(\displaystyle \sum_{n=0}^\infty \frac{x^n}{3^n}\)
+        \task \(\displaystyle \sum_{n=0}^\infty \frac{(x-1)^n}{3^n}\)
+        \task \(\displaystyle \sum_{n=0}^\infty \frac{x^{2n}}{3^n}\)
+        \task \(\displaystyle \sum_{n=0}^\infty \frac{x^{2n}}{(2n)!}\)
+        \task \(\displaystyle \sum_{n=0}^\infty \frac{(-1)^n}{2n+1} x^{2n+1}\)
+        \task \(\displaystyle \sum_{n=1}^\infty \frac{x^n}{2 \cdot 4 \cdot 6 \cdots (2n)}\)
+        \task \(\displaystyle \sum_{n=1}^\infty \frac{(-2)^{n+1}}{n} x^n\)
+        \task \(\displaystyle \sum_{n=0}^\infty \frac{x^n}{\sqrt{2n+1}}\)
+    \end{tasks}
+\end{question}
+
+\vspace{20pt}
+
+\section{Maclaurin/Taylor series}
+
+\begin{question}
+    Find the Maclaurin series (Taylor series centered at \(x = 0\)) for the following functions.
+    \begin{tasks}[label={\arabic*.}](2)
+        \task \(\displaystyle f(x) = \frac{1}{3 + x}\)
+        \task \(\displaystyle f(x) = \eu^{-x^2}\)
+        \task \(\displaystyle f(x) = (x+1)^3 + (x+1)^2 + (x + 1) + 1\)
+        \task \(\displaystyle f(x) = \frac{\eu^{x} + \eu^{-x}}{2}\)
+        \task \(\displaystyle f(x) = \odv[order=2]{}{x} \bigl( x \cos (x^2) \bigr)\)
+        \task \(\displaystyle f(x) = \int_{0}^{x} \frac{\sin t}{t} \odif{t}\)
+        \task (challenge) \(\displaystyle f(x) = \int_{-2}^{x} \frac{1}{t^2 + 4} \odif{t}\)
+    \end{tasks}
+\end{question}
+
+\end{document}

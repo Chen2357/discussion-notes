@@ -1,0 +1,75 @@
+\documentclass{discussion}
+
+\usepackage{amsmath, amsthm, amssymb}
+% \usepackage{xcolor, hyperref, cleveref}
+\usepackage{mathtools}
+\usepackage{derivative}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{tasks}
+\usepackage{mdframed}
+\usepackage{interval}
+\usepackage{tikz}
+\usetikzlibrary{patterns}
+\usepackage{commands}
+
+\settasks{
+    label-width = 13.9917pt,
+    item-indent = 17.64131pt,
+    after-item-skip = 130pt,
+    column-sep = 20pt,
+    label = (\arabic*)
+}
+
+\pgfdeclarepatternformonly{mydots}{\pgfqpoint{-1pt}{-1pt}}{\pgfqpoint{1pt}{1pt}}{\pgfqpoint{10pt}{10pt}}% original definition: \pgfqpoint{3pt}{3pt}
+{%
+  \pgfpathcircle{\pgfqpoint{0pt}{0pt}}{.5pt}%
+  \pgfusepath{fill}%
+}%
+
+\discussion{8}
+\author{Sections B04 and B06}
+\date{Fall 2024}
+
+\begin{document}
+
+\begin{question}
+    Sketch the domain of \(f(x, y)\).
+    \begin{tasks}(2)
+        \task \(\displaystyle f(x, y) = \frac{1}{\ln(y - x - 2)}\)
+        \task \(\displaystyle f(x, y) = \sqrt{4 - x^2 - y^2}\)
+        \task \(\displaystyle f(x, y) = \sqrt{(x-1)(y-2)}\)
+        \task \(\displaystyle f(x, y) = \sec(x)\tan(y)\)
+    \end{tasks}
+\end{question}
+
+\vspace{120pt}
+
+\begin{question}
+    Sketch the level curves of \(f(x, y)\).
+    \begin{tasks}(2)
+        \task \(f(x, y) = \sqrt{x^2 + y^2}\)
+        \task \(f(x, y) = 4x^2 - y^2\)
+        \task \(f(x, y)\) is the distance of the point \((x, y)\) from the line \(y - 2x + 2 = 0\).
+        \task (challenge) \(f(x, y)\) is the angle \(ABC\) formed by \(A = (-1, 0)\), \(B = (x, y)\), and \(C = (1, 0)\) for \(y > 0\).
+    \end{tasks}
+\end{question}
+
+\tikz[remember picture,overlay]\draw[pattern=mydots, opacity=0.6] (-4,-25) rectangle ++(30,50);
+\clearpage
+
+\begin{question}
+    Evaluate the following limits or show that the limit does not exist.
+    \begin{tasks}(2)
+        \task \(\displaystyle \lim_{(x, y) \to (0, \pi/4)} \sec(x) \tan(y)\)
+        \task \(\displaystyle \lim_{\stackrel{(x, y) \to (1, 1)}{x \neq y}} \frac{x + y - 2}{x - y}\)
+        \task \(\displaystyle \lim_{(x, y) \to (1, 1)} \frac{x - y}{x^2 - y^2}\)
+        \task \(\displaystyle \lim_{(x, y) \to (0, 0)} \frac{2xy}{x^2 + y^2}\)
+        \task \(\displaystyle \lim_{(x, y) \to (0, 0)} x \cos \frac{1}{y}\)
+        \task \(\displaystyle \lim_{(x, y) \to (0, 0)} \frac{x^2 y}{x^2 + y^2}\)
+        \task \(\displaystyle \lim_{(x, y) \to (0, 0)} \frac{\sin(x^2 + 2y^2)}{x^2 + y^2}\)
+        \task \(\displaystyle \lim_{(x, y) \to (0, 0)} \eu^{y} \frac{\sin x}{x}\)
+    \end{tasks}
+\end{question}
+
+\end{document}

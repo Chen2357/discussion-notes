@@ -1,0 +1,79 @@
+\documentclass{discussion}
+
+\usepackage{amsmath, amsthm, amssymb}
+% \usepackage{xcolor, hyperref, cleveref}
+\usepackage{mathtools}
+\usepackage{derivative}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{tasks}
+\usepackage{mdframed}
+\usepackage{interval}
+% \usepackage{tikz}
+% \usetikzlibrary{patterns}
+\usepackage{commands}
+
+\settasks{
+    label-width = 13.9917pt,
+    item-indent = 17.64131pt,
+    after-item-skip = 80pt,
+    column-sep = 20pt,
+    label = (\arabic*)
+}
+
+
+\discussion{9}
+\author{Sections B04 and B06}
+\date{Fall 2024}
+
+\begin{document}
+
+% Chain rule
+\begin{question}
+    Express \(\displaystyle \odv{w}{t}\) as a function of \(t\).
+    \begin{tasks}(2)
+        \task \(\displaystyle w = x^2 + y^2\), \(x = \cos t\), \(y = \sin t\)
+        \task \(\displaystyle w = \eu^{x} - \sin y\), \(x = t^2\), \(y = t^3\)
+        \task \(\displaystyle w = \ln ((2x + 3y)^2)\), \(x = \eu^{t}\), \(y = t\)
+        \task \(\displaystyle w = xy + (xy)^2\), \(x = t^2\), \(y = \ln t\)
+        \task \(\displaystyle w = z + z^2\), \(z = xy\), \(x = t^2\), \(y = \ln t\)
+        \task \(\displaystyle w = \frac{z}{x} + \frac{z}{y}\), \(x = \cos^2 t\), \(y = \sin^2 t\), \(z = \ln t\)
+    \end{tasks}
+\end{question}
+
+\vspace{60pt}
+
+\settasks{
+    after-item-skip = 110pt,
+}
+
+\begin{question}
+    A differentiable function \(f(x, y)\) has a critical point (maximum, minimum, or saddle point) at \((x_0, y_0)\) if \(\displaystyle \pdv{f}{x}(x_0, y_0) = \pdv{f}{y}(x_0, y_0) = 0\).
+    % for all differentiable curves \((x(t), y(t))\) such that \(x(0) = x_0\) and \(y(0) = y_0\), \(f(x(t), y(t))\) has a critical point at \(t = 0\), meaning
+    % \begin{equation*}
+    %     \odv{(f(x(t), y(t)))}{t}(0) = 0.
+    % \end{equation*}
+    Determine the critical points for each of the following \(f(x, y)\).
+    \begin{tasks}(2)
+        \task \(\displaystyle f(x, y) = \frac{x^2}{2} + xy + \frac{y^3}{3}\)
+        \task \(\displaystyle f(x, y) = \left( \arctan\left( x^2 - 4x + y^2 \right) + \frac{\pi}{2} \right) \eu^{x^2 - 4x + y^2}\)
+        \task \(f(x, y) = g(u(x, y), v(x, y))\) \\
+        where \(g(u, v) = u^2 - 4u + v^2\), \\
+        \(u(x, y) = x + \ln y\), and \(v(x, y) = x - \ln y\).
+        \task \(f(x, y) > 0\) implicitly defined by the equation \(\displaystyle x f(x,y) + (f(x, y))^2 - x^2 - y^2 = 1\).
+    \end{tasks}
+\end{question}
+
+% \clearpage
+
+% \begin{question}[Optimization under constraint]
+%     ~
+%     \begin{tasks}
+%         \task Find the critical
+
+%         % critical values of the function \(f(x, y) = x^2 + y^2\) subject to the constraint \(x + y = 1\).
+%     \end{tasks}
+
+% \end{question}
+
+\end{document}

@@ -1,0 +1,123 @@
+\documentclass{discussion}
+
+\usepackage{amsmath, amsthm, amssymb}
+% \usepackage{xcolor, hyperref, cleveref}
+\usepackage{mathtools}
+\usepackage{derivative}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{tasks}
+\usepackage{mdframed}
+\usepackage{commands}
+
+\settasks{
+    label-width = 1em,
+    item-indent = 16pt,
+}
+
+\discussion{2}
+\author{Sections B04 and B06}
+\date{Fall 2024}
+
+\begin{document}
+
+\section{Basic convergence tests}
+
+\begin{question}
+    Match the series on the left with the appropriate convergence test and conclusion on the right, evaluating the series if asked.
+
+    \begin{center}
+        \setlength{\tabcolsep}{5em}
+        \begin{tabularx}{\textwidth}{lX}
+            \(\displaystyle \sum_{n=1}^\infty \frac{1}{n^{3/2}}\) & Diverges by the divergence test \\
+            \(\displaystyle \sum_{n=1}^\infty \frac{1}{\sqrt{1 + n}}\) & \linespread{1.4}\selectfont  It's a convergent geometric series that converges to \rule{1.5cm}{0.15mm} \\
+            \(\displaystyle \sum_{n=2}^\infty \frac{1}{n \ln n}\) & \linespread{1.4}\selectfont  It's a telescoping series that converges to \rule{1.5cm}{0.15mm} \\
+            \(\displaystyle \sum_{n=2}^\infty \frac{1}{n (\ln n)^2}\) & Converges by the \(p\)-series Test \\
+            \(\displaystyle \sum_{n=1}^\infty \frac{1}{\sqrt{n}}\) & Diverges by the \(p\)-series Test \\
+            \(\displaystyle \sum_{n=1}^\infty \frac{3^n}{4^n}\) & Converges by the integral test \\
+            \(\displaystyle \sum_{n=1}^\infty \frac{3}{n(n+2)}\) & Diverges by the integral test \\
+        \end{tabularx}
+    \end{center}
+\end{question}
+
+\begin{question}
+    The following boxed claim and proof are incorrect.
+    Identify the mistake(s).
+
+    \begin{mdframed}
+        \textbf{Claim:} \(\displaystyle \sum_{n=1}^\infty n^3 \eu^{-n} \leq 6\)
+
+        \noindent
+        \textbf{Proof:} The integral test tells us that
+        \begin{equation*}
+            \int_1^\infty x^3 \eu^{-x} \odif{x} \leq \sum_{n=1}^\infty n^3 \eu^{-n} \leq \int_0^\infty x^3 \eu^{-x} \odif{x}.
+        \end{equation*}
+        We evaluate the right integral to find that
+        \begin{equation*}
+            \int_0^\infty x^3 \eu^{-x} \odif{x} = \left[ (-x^3 - 3x^2 - 6x - 6) \eu^{-x} \right]_{0}^{\infty} = 6.
+        \end{equation*}
+        Hence, the inequality holds.
+    \end{mdframed}
+    Challenge: correctly prove that \(\sum_{n=1}^\infty n^3 \eu^{-n}\) converges and find an actual upper bound.
+    (Check your answer with the fact that \(\sum_{n=1}^\infty n^3 \eu^{-n} \approx 6.0065\).)
+\end{question}
+
+\section{Estimating errors}
+
+Let \(a_n \geq 0\) be a nonnegative sequence.
+By estimating the infinite series \(\sum_{n=1}^\infty a_n\) with a partial sum \(\sum_{n=1}^{N} a_n\) to a precision of \(\epsilon\), we mean finding an integer \(N\) such that
+\begin{equation*}
+    \sum_{n=1}^\infty a_n - \sum_{n=1}^{N} a_n = \sum_{n=N+1}^\infty a_n < \epsilon.
+\end{equation*}
+This can be done by comparing the series to an integral.
+If \(f\) is a decreasing function such that \(f(n) = a_n\), then integral test tells us that
+\begin{equation*}
+    \int_{N+1}^\infty f(x) \odif{x} \leq \sum_{n=N+1}^\infty a_n \leq \int_{N}^\infty f(x) \odif{x},
+\end{equation*}
+so the task becomes finding an integer \(N\) such that
+\begin{equation*}
+    \sum_{n=N+1}^\infty a_n \leq \int_{N}^\infty f(x) \odif{x} < \epsilon.
+\end{equation*}
+
+\begin{question}[Estimating errors]
+    Estimate a value of \(N\) such that \(\sum_{n=1}^{N} a_n\) approximates the infinite series \(\sum_{n=1}^\infty a_n\) to within a precision of \(0.03\).
+    \begin{tasks}(2)
+        \task \(\displaystyle a_n = \frac{1}{n^2}\)
+        \task \(\displaystyle a_n = \frac{1}{(n+1) (\ln (n+1))^2}\)
+        \task* \(\displaystyle a_n = \frac{1}{n(n+1)}\) (Challenge: use another method besides comparison with an integral)
+    \end{tasks}
+\end{question}
+
+\section{Comparison tests}
+
+\begin{question}
+    The following boxed claim and proof are incorrect.
+    Identify the mistake(s).
+
+    \begin{mdframed}
+        \textbf{Claim:} \(\displaystyle \sum_{n=1}^{\infty} \frac{\sin(1/n)}{n}\) diverges.
+
+        \noindent
+        \textbf{Proof:}
+        Since \(\sin(1/n) \leq 1\) for every positive integer \(n\), we can apply direct comparison test with the harmonic series \(\displaystyle \sum_{n=1}^{\infty} \frac{1}{n}\).
+        Since the harmonic series diverges, the original series must also diverge.
+    \end{mdframed}
+
+    Challenge: show that \(\sum_{n=1}^{\infty} \frac{\sin(1/n)}{n}\) converges.
+\end{question}
+
+\begin{question}
+    Match the series with the appropriate conclusion and state the series used to compare.
+
+    \begin{center}
+        \setlength{\tabcolsep}{5em}
+        \begin{tabularx}{\textwidth}{lX}
+            \(\displaystyle \sum_{n=1}^\infty \frac{n}{3^n}\) & \linespread{1.4}\selectfont Converges because it grows at the same rate as the convergent series: \\
+            \(\displaystyle \sum_{n=1}^\infty \frac{n + 2}{n^3 - 2n + 2}\) & \linespread{1.4}\selectfont Diverges because it grows at the same rate as the divergent series: \\
+            \(\displaystyle \sum_{n=1}^\infty \sin \left( \frac{1}{n} \right)\) & \linespread{1.4}\selectfont Converges because it grows slower than the convergent series: \\
+            \(\displaystyle \sum_{n=1}^\infty \frac{1}{1 + \ln n}\) & \linespread{1.4}\selectfont Diverges because it grows faster than the divergent series:
+        \end{tabularx}
+    \end{center}
+\end{question}
+
+\end{document}

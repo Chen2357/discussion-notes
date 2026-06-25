@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAT 21C Discussion 5</title>
+    <meta name="authors" content="Chen Liang">
+  </head>
+  <body>
+    <h2>§I Error Estimation</h2>
+    <p>Recall Taylor’s formula from the previous discussion.</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #aaaaaa1a; border: .1em dashed #0f65a0; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">
+      <p><span style="color: #0f65a0;">(Taylor’s formula)</span> The remainder term $$R_n(x) = f(x) - \left( f(0) + f'(0) x + \frac{f''(0)}{2!} x^2 + \cdots + \frac{f^{(n)}(0)}{n!} x^n \right)$$ after approximating \(f(x)\) by the Taylor polynomial of degree \(n\) is bounded by $$\lvert R_n(x) \rvert \leq \frac{M}{(n+1)!} \lvert x \rvert^{n+1}$$ if \(M\) is greater than or equal to \(\lvert f^{(n+1)}(c) \rvert\) for all \(c\) between \(0\) and \(x\). For example, if \(\lvert f^{(n+1)}(c) \rvert\) is increasing, then we can take \(M = \lvert f^{(n+1)}(x) \rvert\).</p>
+      <p>If we can show that $$\lim_{n \to \infty} \lvert R_n(x) \rvert \leq \lim_{n \to \infty} \frac{M}{(n+1)!} \lvert x \rvert^{n+1} = 0,$$ then we can conclude that the Taylor series converges to \(f(x)\) at \(x\). Be careful that \(M\) is not always a constant, it can depend on \(n\) or even \(x\), so the limit \(\lim_{n \to \infty} \frac{M}{(n+1)!} \lvert x \rvert^{n+1}\) might not be zero.</p>
+    </div>
+    <p>Last time, we used it to derive that $$1 + 7 + \frac{7^2}{2!} + \frac{7^3}{3!} + \frac{7^4}{4!} + \cdots = e^7$$ which tells us that we can get the numerical value of \(e^7\) with arbitrary precision by using more and more terms, but this begs the question: how many terms do we need to add to get a magnitude of error say less than \(10^{-8}\)?</p>
+    <p>Thankfully, Taylor’s formula also answers this question. It tells us that the error if we approximate \(e^7\) by the Taylor polynomial of degree \(n\) is bounded by $$\lvert R_n(7) \rvert \leq \frac{M}{(n+1)!} 7^{n+1}$$ where, as we discussed last week, we can pick \(M = e^7\) because \(e^7\) is greater than or equal to \(\lvert f^{(n+1)}(c) \rvert = e^c\) for all \(c\) between \(0\) and \(7\). Therefore, the error using polynomial of degree \(40\) for example is bounded by $$\lvert R_{40}(7) \rvert \leq \frac{e^7}{41!} 7^{41} \lesssim 1.462 \times 10^{-12}$$ and by sheer luck, I got a number less than \(10^{-8}\), so I can conclude that the Taylor polynomial of degree \(40\) approximates \(e^7\) with an error less than \(10^{-8}\). Under usual circumstances, we would need to find an \(n\) that solves the inequality $$\lvert R_{n} (x) \rvert \leq \frac{M}{(n+1)!} \lvert x \rvert^{n+1} &lt; 10^{-8}.$$</p>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span> Consider the function \(f(x) = \cos x\).</p>
+    <ol>
+      <li>Use a fourth-order Taylor polynomial to approximate the value of \(\cos(0.5)\).</li>
+      <li>Use Taylor’s formula to estimate the error in your approximation.</li>
+      <li>Now use the fact that the Taylor series for \(\cos x\) is alternating to find another estimation of the error. Which method gives a better estimation?</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>The derivatives up to the fourth order are $$f(x) = \cos x, \quad f'(x) = -\sin x, \quad f''(x) = -\cos x, \quad f'''(x) = \sin x, \quad f^{(4)}(x) = \cos x.$$ Evaluating them at \(0\) gives us $$f(0) = 1, \quad f'(0) = 0, \quad f''(0) = -1, \quad f'''(0) = 0, \quad f^{(4)}(0) = 1.$$ Therefore, the fourth-order Taylor polynomial is $$P_4(x) = 1 - \frac{x^2}{2!} + \frac{x^4}{4!}.$$ It is also useful to just remember that the Taylor series for \(\cos x\) is an alternating series with only even powers of \(x\), that is $$1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \frac{x^8}{8!} - \cdots.$$ Therefore, the approximation is $$P_4(0.5) = 1 - \frac{0.5^2}{2!} + \frac{0.5^4}{4!} = \frac{337}{384}.$$</li>
+      <li>We have $$\lvert R_4(0.5) \rvert \leq \frac{M}{5!} 0.5^5$$ where we can pick \(M = 1\) because \(\lvert f^{(5)}(c) \rvert = \lvert -\sin c \rvert\) is less than or equal to \(1\) for all \(c\) between \(0\) and \(0.5\). Therefore, the error is bounded by $$\lvert R_4(0.5) \rvert \leq \frac{1}{5!} 0.5^5 \lesssim 0.000261.$$</li>
+      <li>We shown in the previous discussion that the Taylor series for \(\cos x\) does converge to \(\cos x\), that is $$\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots.$$ So we have $$\cos(0.5) = 1 - \frac{0.5^2}{2!} + \frac{0.5^4}{4!} - \frac{0.5^6}{6!} + \cdots = \sum_{n=0}^{\infty} \frac{(-1)^n}{2^{2n} (2n)!}.$$ Note that this is an alternating series and the terms \(\frac{1}{2^{2n} (2n)!}\) are decreasing and converges to \(0\), so we can apply the alternating series test estimation (Theorem 16 in Section 10.6 in the textbook) to say $$\lvert R_4(0.5) \rvert \leq \text{The absolute value of the next term in the series} = \frac{1}{2^6 6!} \lesssim 0.0000218.$$ We see that the alternating series test gives us a better estimation.</li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+    <h2>§II Why We Study Vectors?</h2>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Discuss)</span> Suppose you are trying to go from location \(A\) to location \(B\) but you must stop by a river that is flowing in a straight line. How do you find the shortest path that does this?</p>
+    <figure>
+      <img src="/courses/1067114/files/31055233/preview" alt="A blue horizontal line with red points A and B on the upper side and a gray path from A to the blue line and then to B." width="60%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+      <figcaption>
+        <p style="text-align: center;">Figure 1: Is this the shortest path?</p>
+      </figcaption>
+    </figure>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span> Imagine that there is a mirror image of the location \(A\) on the other side of the river, which we will call \(A'\). Note that each path from \(A\) to \(B\) that goes through the river corresponds to a path equal in length from \(A'\) to \(B\). Therefore, the shortest path should correspond to the straight path from \(A'\) to \(B\). Drawing the path and doing a reflection, we can obtain the shortest path from \(A\) to \(B\) that goes through the river.</p>
+    <figure>
+      <img src="/courses/1067114/files/31055235/preview" alt="Same as previous image with point A' which is the reflection of A across the blue line, a yellow path from A' to B that corresponds to the gray path, and a red path from A and A' to B." width="60%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+      <figcaption>
+        <p style="text-align: center;">Figure 2: The yellow path shares the same length as the gray path. The shortest path and its corresponding path is drawn in red. We see that the corresponding path from A’ to B is a straight line.</p>
+      </figcaption>
+    </figure>
+    <p>I think this is a extremely clever solution! It is so clever that I don’t think I could come up with it and I find the idea hard to extrapolate to other problems. Luckily, mathematicians have developed the so-called “Lagrange multipliers” to solve this kind of optimization problems under constraints, and the perk is that it reveals just as much geometric insight and can be applied to a much wider range of problems.</p>
+    <p>In fact, I can show you the idea right now. Imagine that the river is actually a rail and on the rail, there is a bead that can slide freely. We can put a string through point \(A\), the bead, and point \(B\). The shortest path will be revealed if we just pull the string tight.</p>
+    <figure>
+      <img src="/courses/1067114/files/31055236/preview" alt="A red dot on the blue line and a white path that coincides with the shortest path. Force vectors are drawn on the bead, two parallel to the white path and one perpendicular to the blue line." width="60%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+      <figcaption>
+        <p style="text-align: center;">Figure 3: The red dot on the blue line represents the bead and the white path represents the string.</p>
+      </figcaption>
+    </figure>
+    <p>This path is the same as the one we found earlier. To see this, we think about the tension forces on the bead. There are two forces: one towards point \(A\) and one towards point \(B\). The total force must be perpendicular to the rail otherwise the bead would move, and this implies that the angles between each force vector and the rail must be the same, so reflecting a force vector across the rail will result in vectors pointing in opposite direction. This is the same geometric insight that was provided by the mirror image solution.</p>
+    <p>The key insight of the Lagrange multiplier method is the idea that <strong>something is equilibrium (think <em>optimal</em>) if the total force is perpendicular to the constraint.</strong> Perhaps you can already imagine how this idea can be applied to various optimization problems such as finding the point on a parabola closest to a given point.</p>
+    <hr style="border: 1px solid #c73834;">
+    <p>I hope that this discussion gives you some motivation for why we study vectors, and I want you to keep in mind that our ultimate goal for the second half of the course is to understand the Lagrange multiplier method.</p>
+    <h2>§III Vectors</h2>
+    <p>In a 2-dimensional space, a vector is two numbers put in angle brackets such as \(\vec{v} = \langle 8, 6 \rangle\). A vector represents only a direction and a magnitude. When we draw a vector, we have to choose a base point, but different choices of base points represent the same vector. For example, the red vectors in the figure below both represent the same vector \(\vec{v} = \langle 8, 6 \rangle\).</p>
+    <figure>
+      <img src="/courses/1067114/files/31055239/preview" alt="A grid with two red vectors with the same length and direction but different base." width="40%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+      <figcaption>
+        <p style="text-align: center;">Figure 4: The two red vectors represent the same vector \(\vec{v} = \langle 8, 6 \rangle = 8 \hat{i} + 6 \hat{j}\).</p>
+      </figcaption>
+    </figure>
+    <p>We can also write a vector in terms of the standard unit vectors \(\hat{i}\) and \(\hat{j}\) which are vectors with length 1 pointing in the cardinal directions, so the vector \(\vec{v} = \langle 8, 6 \rangle\) can also be written as \(8 \hat{i} + 6 \hat{j}\).</p>
+    <p>There are operations that we can do with vectors. In this discussion, we will just talk about addition, subtraction, and scalar multiplication.</p>
+    <ul>
+      <li>
+        <p>To add vectors, we put them head to tail. Algebraically, we simply add the corresponding components, so for example, \(\langle 1, 2 \rangle + \langle 3, 4 \rangle = \langle 4, 6 \rangle\).</p>
+        <figure>
+          <img src="/courses/1067114/files/31055230/preview" alt="White arrows with the same base point labeled a and b. A red arrow from the base point to the opposite corner of the parallelogram formed by the white arrows labeled a + b." width="30%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+          <figcaption>
+            <p style="text-align: center;">Figure 5: Addition of vectors.</p>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <p>There are two ways to think about \(\vec{a} - \vec{b}\). One way is to think about it as the vector that when we add it to \(\vec{b}\), we get \(\vec{a}\). Another way is to think of it as adding \(-\vec{b}\) (the vector with the same length as \(\vec{b}\) but in the opposite direction) to \(\vec{a}\). Algebraically, we can calculate it by subtracting the corresponding components, so for example, \(\langle 1, 3 \rangle - \langle 3, 4 \rangle = \langle -2, -1 \rangle\).</p>
+        <figure>
+          <img src="/courses/1067114/files/31055238/preview" alt="White arrows with the same base point labeled a and b. A red arrow from the tip of b to the tip of a labeled a - b." width="30%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+          <figcaption>
+            <p style="text-align: center;">Figure 6: Two ways to subtract vectors.</p>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <p>To scale a vector by a number, we multiply the length of the vector by that number (direction will be flipped if negative). Algebraically, we can calculate it by multiplying each component by that number, so for example, \(2 \langle 1, 3 \rangle = \langle 2, 6 \rangle\).</p>
+        <figure>
+          <img src="/courses/1067114/files/31055237/preview" alt="An arrow labeled a, an arrow half of the length labeled 1/2 a, and an arrow pointing in the opposite direction with the same length as a labeled -a." width="50%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+          <figcaption>
+            <p style="text-align: center;">Figure 7: Scaling of vectors.</p>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span> If vectors \(\vec{a}\) and \(\vec{b}\) are drawn with the same base point, which of the following vectors correspond to the vector from the base point to the midpoint between the tips of \(\vec{a}\) and \(\vec{b}\)?</p>
+    <figure><img src="/courses/1067114/files/31055232/preview" alt="White arrows one labeled a pointing up and right and one labeled b pointing to the right. A red arrow labeled question mark." width="30%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;"></figure>
+    <ol>
+      <li>\(\frac{1}{2} (\vec{a} + \vec{b})\)</li>
+      <li>\(\vec{a} + \frac{1}{2} (\vec{a} - \vec{b})\)</li>
+      <li>\(\vec{b} + \frac{1}{2} (\vec{a} - \vec{b})\)</li>
+      <li>\(\vec{a} - \frac{1}{2} (\vec{a} - \vec{b})\)</li>
+      <li>\(\vec{b} + \frac{1}{2} (\vec{b} - \vec{a})\)</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span> Expressions 1, 3, and 4 correspond to the vector from the base point to the midpoint of the segment between \(\vec{a}\) and \(\vec{b}\). The interpretation of \(\frac{1}{2} (\vec{a} + \vec{b})\) is the half of the diagonal of the parallelogram shown in the vector addition figure. It is exactly the vector we want. The interpretation of the other expressions are shown in the figure below.</p>
+    <figure><img src="/courses/1067114/files/31055231/preview" alt="The previous figure with blue arrows labeled 1/2 (a - b) pointing up and left, one starting from the tip of a and one starting from the tip of b, and red arrows labeled 1/2 (b - a) pointing down and right, one starting from the tip of a and one starting from the tip of b." width="30%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;"></figure>
+    <hr style="border: 1px solid #c73834;">
+  </body>
+</html>

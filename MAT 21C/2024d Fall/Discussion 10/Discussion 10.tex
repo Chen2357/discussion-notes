@@ -1,0 +1,140 @@
+\documentclass{discussion}
+
+\usepackage{amsmath, amsthm, amssymb}
+% \usepackage{xcolor, hyperref, cleveref}
+\usepackage{mathtools}
+\usepackage{derivative}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{tasks}
+\usepackage{mdframed}
+\usepackage{interval}
+% \usepackage{tikz}
+% \usetikzlibrary{patterns}
+\usepackage{commands}
+
+\settasks{
+    % label-width = 13.9917pt,
+    % item-indent = 17.64131pt,
+    % after-item-skip = 80pt,
+    % column-sep = 20pt,
+    label = \boxed{\phantom{.}}
+}
+
+\discussion{10}
+\author{Sections B04 and B06}
+\date{Fall 2024}
+
+\begin{document}
+
+% \section{Lagrange Multipliers}
+
+\begin{question}
+    Consider \(f(x, y) = xy - 2x - y\) and \(g(x, y) = 2x + y\).
+    \begin{subquestion}
+        \item What is the maximum value of \(f(x, y)\) subject to the constraint \(g(x, y) = 20\)?
+        \vspace{80pt}
+        \item If \(f(x, y)\) is the profit as a function of minutes of advertising on TV (\(x\)) and podcast (\(y\)), and \(g(x, y)\) is the total cost of advertising (so \(xy\) is the revenue).
+        What is the real-world interpretation of the Lagrange multiplier \(\lambda\)? (Select multiple and argue why they must be equal.)
+        \begin{tasks}(2)
+            \task The profit gained per minute of advertising on TV.
+            \task The profit gained per minute of advertising on podcast.
+            \task The profit gained per dollar spent on advertising on TV.
+            \task The profit gained per dollar spent on advertising on podcast.
+        \end{tasks}
+    \end{subquestion}
+\end{question}
+
+\begin{question}
+    Find the point on the graph of \(y = x^2 + 4x + 6\) that is the closest to the line \(y = 2x\).
+\end{question}
+
+\vspace{80pt}
+
+\begin{question}
+    Consider the tilted ellipse \(5x^2 - 6xy + 5y^2 = 4\).
+    Find the points on the ellipse that are closest to and farthest from the origin.
+\end{question}
+
+\vspace{80pt}
+
+% \section{Second derivative test}
+
+\begin{question}[Second derivative test]
+    Find the critical points of \(f(x, y) = x^2 + 3xy + y^2\) and determine whether they are local maxima, minima, or saddle points.
+\end{question}
+
+\clearpage
+
+% \section{Review}
+
+\begin{question}
+    The following boxed arguments are incorrect or incomplete.
+    Identify the error in each argument and provide a correct solution.
+
+    \begin{mdframed}
+        \textbf{Question:} Determine whether \(\sum_{n=2}^{\infty} \frac{1}{(\ln(n) + 2)^2}\) converges.
+
+        \vspace{10pt}
+        \noindent
+        \textbf{Flawed Argument:} Yes, because as \(n\) approaches infinity, \(\ln(n) + 2\) approaches infinity, so \(\frac{1}{(\ln(n) + 2)^2}\) approach zero which is less than one.
+    \end{mdframed}
+
+    \vspace{10pt}
+
+    \begin{mdframed}
+        \textbf{Question:} Find the interval of convergence of the power series \(\sum_{n=0}^{\infty} \frac{(x-2)^n}{5n + 3}\).
+
+        \vspace{10pt}
+        \noindent
+        \textbf{Flawed argument:} Apply ratio test, the series converges when
+        \begin{equation*}
+            \lim_{n\to \infty} \abs*{\frac{(x-2)^{n+1}}{5(n+1) + 3} \frac{5n + 3}{(x-2)^n}} = \lim_{n\to \infty} \abs*{\frac{5n + 3}{5n + 8} (x - 2)} = \abs{x-2} < 1.
+        \end{equation*}
+        Thus, \(-1 < x - 2 < 1\) which is equivalent to \(1 < x < 3\), so the interval of convergence is \(\ointerval{1}{3}\).
+    \end{mdframed}
+
+    \vspace{10pt}
+
+    \begin{mdframed}
+        \textbf{Question:} Calculate the limit \(\lim_{(x, y) \to (0,0)} \frac{xy}{x^2 + y^2}\) or show that it does not exist.
+
+        \vspace{10pt}
+        \noindent
+        \textbf{Flawed argument:} Along the \(x\)-axis, the limit is \(\lim_{x \to 0} \frac{x \cdot 0}{x^2 + 0} = 0\) and along the \(y\)-axis, the limit is \(\lim_{y \to 0} \frac{0 \cdot y}{0 + y^2} = 0\), so the limit is \(0\).
+    \end{mdframed}
+
+    \vspace{10pt}
+
+    \begin{mdframed}
+        \textbf{Question:} Find the tangent line to the curve \(y = y^2 - x^3 + 1\) at the point \((1, 0)\).
+
+        \vspace{10pt}
+        \noindent
+        \textbf{Flawed argument:} We compute the gradient of \(f(x, y) = y^2 - x^3 + 1\) which at the point \((1, 0)\) is
+        \begin{equation*}
+            \nabla f(x, y) |_{(1, 0)} = \veccomp{-3x^2, 2y}|_{(1,0)} = \veccomp{-3, 0}.
+        \end{equation*}
+        The tangent line is the line orthogonal to the gradient and passing through the point \((1, 0)\), so the equation of the line is \(\veccomp{x - 1, y - 0} \cdot \veccomp{-3, 0} = 0\) which is simply \(x = 1\).
+    \end{mdframed}
+
+    \vspace{10pt}
+
+    \begin{mdframed}
+        \textbf{Question:} Let \(f(x, y) = (x - 1)y\) and \(x(t) = \eu^{t}\) and \(y(t) = \cos(y)\).
+        Find the first two nonzero terms of the Maclaurin series of \(f(x(t), y(t))\).
+
+        \vspace{10pt}
+        \noindent
+        \textbf{Flaws argument:} We write \(x(t) = 1 + t\) and \(y(t) = 1 - \frac{t^2}{2}\), then we get
+        \begin{equation*}
+            f(x(t), y(t)) = (1 + t - 1)\left(1 - \frac{x^2}{2}\right) = t - \frac{t^3}{2}.
+        \end{equation*}
+    \end{mdframed}
+\end{question}
+
+% \begin{question}
+
+% \end{question}
+
+\end{document}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAT 21C Discussion 1</title>
+    <meta name="authors" content="Chen Liang">
+  </head>
+  <body>
+    <h2>§I Introduction</h2>
+    <p>This course will cover two very distinct topics.</p>
+    <ol>
+      <li value="1">Sequences and series.</li>
+      <li value="2">Multivariable calculus.</li>
+    </ol>
+    <p>I will say more about multivariable calculus when we get there. Historically, sequences and series opened the door to modern mathematical reasoning. Mathematicians have always grappled with infinity since the development of calculus. In the beginning, we applied informal reasoning and often got reasonable results, but inconsistencies started to show as we developed concepts like Taylor series, which we will learn in this course. To resolve these inconsistencies, a more formal and rigorous framework is needed. That is how we get the theorem-and-proof framework, which even I find cumbersome sometimes. Still, it leads to satisfying and beautiful results, and I think that makes it worth the effort.</p>
+    <p>As a second-year graduate student in pure math, this is my chance to give you a glimpse of what mathematicians do beyond calculation. And I hope you enjoy!</p>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Discuss)</span> Gather in groups of 2-4 and introduce yourselves. Then, discuss the following questions:</p>
+    <ol>
+      <li>What do you think the calculator does when you punch <code>cos(0.01)</code> into it and it shows the number $$0.999\,950\,000\,4$$ on the screen?</li>
+      <li>There is a way to calculate \(\cos 0.01\) by hand which is to use the formula $$\cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} - \frac{x^6}{720} + \frac{x^8}{40320} - \cdots.$$ If we take the first three terms and perform the precise calculation, we get $$1 - \frac{0.01^2}{2} + \frac{0.01^6}{24} = 0.999\,950\,000\,41\overline{6}.$$ Can we say that this hand calculation is off from the true value of \(\cos 0.01\) by \(0.000\,000\,000\,01\overline{6}\)?</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Explanation.</em></span></p>
+    <ol>
+      <li>
+        <p>The calculator either uses a Taylor series or runs a recursive algorithm (the CORDIC algorithm) that gets more and more accurate with each loop it runs. However, the calculator cannot run forever, so the designer has to put a manual stop to the calculation, but how does the designer decide when to stop?</p>
+        <p>The answer is that, through an analysis of sequential convergence, the designer can guarantee that after a certain number of iterations, the result is accurate up to a certain number of digits. So the designer can decide on the number of iterations based on how many digits of accuracy they want to guarantee (how many digits are shown on the screen).</p>
+      </li>
+      <li>
+        <p>As we discussed, the value shown on the calculator is also an approximation! How it obtains this approximation is exactly analogous to this hand calculation. Neither of them is the true value of \(\cos 0.01\) we can only know how far off we are from the true value by analyzing series convergence, and the calculator is not the source of truth.</p>
+        <p>If we take a look at the next term in the Taylor series \(x^8 / 40320\), we see that it only changes our calculation by less than \(0.01^8\), and that tells us that actually our result is accurate at least to \(16\) decimal places (at least 6 more than the calculator shows). We do in general have to worry about more error terms beyond \(x^8 / 40320\), but we will eventually learn something called the <em>alternating series test</em> that will shed light on my confidence that we do not have to worry about the error terms beyond \(x^8 / 40320\).</p>
+      </li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+    <h2>§II Informal Understanding of Limits</h2>
+    <p>A sequence is a list of numbers in a given order such as $$0, \frac{1}{2}, \frac{2}{3}, \frac{3}{4}, \frac{4}{5}, \frac{5}{6}, \dots$$ It can come from a formula, an algorithm (such as a recursive procedure), or a <em>recognizable</em> pattern. Can you recognize the next term in the above sequence? Hopefully you say \(6/7\), and if I ask what is the term after that you would say \(7/8\), and so on.</p>
+    <p>Because you can predict the next term in the sequence forever, my presentation of the sequence is a <em>recognizable</em> one and hence is a fine way to define a sequence.</p>
+    <p>The sequence can also be presented with a formula such as $$a_n = \frac{n-1}{n},$$ and this is because if we substitute \(n = 1\), we have \(a_1 = 0\) if we substitute \(n = 2\), we have \(a_2 = 1/2\) and so on, forever!</p>
+    <p>We can draw the above sequence by plotting the points whose \(x\)-coordinates are the indices and \(y\)-coordinates are the terms of the sequence, so the first point is \((1, 0)\) and the second point is \((2, 1/2)\), and so on. The plot looks like this:</p>
+    <figure>
+      <img src="/courses/1067114/files/30748396/preview" alt="30 red points evenly spaced horizontally and increasing vertically, approaching a red dashed horizontal line y = 1" width="80%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+      <figcaption>
+        <p style="text-align: center;">Figure 1: A plot of the sequence \(a_n = \frac{n-1}{n}\) for \(n = 1, 2, \dots, 30\).</p>
+      </figcaption>
+    </figure>
+    <p>We see that the points are getting closer and closer to the horizontal line \(y = 1\) as we move to the right. To be more precise, the <em>tails</em> of the sequence get arbitrarily close to the line \(y = 1\) (a tail of a sequence is what remains after we remove a finite number of starting terms). This is what we mean by saying that $$\lim_{n \to \infty} \frac{n-1}{n} = 1.$$</p>
+    <p>There are four possible limit scenarios for a sequence \(a_n\):</p>
+    <ol>
+      <li value="1">the limit of \(a_n\) is a finite number \(L\): the tails get arbitrarily close to \(L\).</li>
+      <li value="2">the limit of \(a_n\) is \(\infty\): even the smallest terms in the tails get arbitrarily large.</li>
+      <li value="3">the limit of \(a_n\) is \(-\infty\): even the greatest terms in the tails get arbitrarily large in the negative direction.</li>
+      <li value="4">there are two subsequences of \(a_n\) with different limits.</li>
+    </ol>
+    <p>In the first case, we say that \(a_n\) is convergent and it converges to \(L\), and in the other three cases, we say that \(a_n\) is divergent.</p>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span> Draw the following sequences and categorize them into the four limit scenarios above:</p>
+    <ol>
+      <li>The sequence \(\displaystyle 1, 4, 9, 16, 25, 36, \dots\).</li>
+      <li>The sequence \(\displaystyle 1, -\frac{1}{2}, \frac{1}{3}, -\frac{1}{4}, \frac{1}{5}, -\frac{1}{6}, \dots\).</li>
+      <li>The sequence \(\displaystyle 1, -1, 1, -1, 1, -1, \dots\).</li>
+      <li>The sequence \(\displaystyle 0, -1, 0, -2, 0, -3, 0, -4, \dots\).</li>
+      <li>Can you come up with a sequence that does not fit into any of the four limit scenarios above?</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>
+        <p>Based on the following plot, we can see that this sequence is diverging to \(\infty\). Note that the points lie on the parabola \(y = x^2\).</p>
+        <figure>
+          <img src="/courses/1067114/files/30748403/preview" alt="Points evenly spaced horizontally and lie on the parabola labeled y = x^2." width="300" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+          <figcaption>
+            <p style="text-align: center;">Figure 2: A plot of the sequence \(a_n = n^2\) for \(n = 1, 2, \dots, 12\).</p>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <p>Based on the following plot, we can see that this sequence is converging to \(0\). The sequence is oscillating between positive and negative values but the points are all getting closer and closer to the horizontal line \(y = 0\).</p>
+        <figure>
+          <img src="/courses/1067114/files/30748405/preview" alt="Points alternating above and below the x-axis. Points are either on the hyperbola y = 1/x or the hyperbola y = -1/x." width="300" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+          <figcaption>
+            <p style="text-align: center;">Figure 3: A plot of the sequence \(a_n = (-1)^{n-1} / n\) for \(n = 1, 2, \dots, 14\).</p>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <p>The limit does not exist because it has two subsequences with different limits.</p>
+        <ul>
+          <li>If we start with the first term and take every other term, we get the subsequence \(1, 1, 1, \dots\), which converges to \(1\).</li>
+          <li>If we start with the second term and take every other term, we get the subsequence \(-1, -1, -1, \dots\), which converges to \(-1\).</li>
+        </ul>
+        <figure>
+          <img src="/courses/1067114/files/30748406/preview" alt="Points alternating between on the line y = 1 and the line y = -1." width="300" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+          <figcaption>
+            <p style="text-align: center;">Figure 4: A plot of the sequence \(a_n = (-1)^{n-1}\) for \(n = 1, 2, \dots, 14\).</p>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <p>The limit does not exist because it has two subsequences with different limits.</p>
+        <ul>
+          <li>If we start with the first term and take every other term, we get the subsequence \(0, 0, 0, \dots\) whose limit is \(0\).</li>
+          <li>If we start with the second term and take every other term, we get the subsequence \(-1, -2, -3, \dots\) whose limit is \(-\infty\).</li>
+        </ul>
+        <figure>
+          <img src="/courses/1067114/files/30748407/preview" alt="Points alternating between on the x-axis and points on the line y = -x." width="300" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+          <figcaption>
+            <p style="text-align: center;">Figure 5: A plot of the first \(14\) terms of the sequence \(0, -1, 0, -2, 0, -3, 0, -4, \dots\).</p>
+          </figcaption>
+        </figure>
+      </li>
+      <li>
+        <p>No! The four limit scenarios are exhaustive. It comes from a deeper fact in real analysis that every sequence valued in the extended real numbers \(\mathbb{R} \cup \{\infty, -\infty\}\) either converges or has at least two subsequences with different limits. This is a result of the fact that the extended real numbers \(\mathbb{R} \cup \{\infty, -\infty\}\) is a <em>compact topological space</em>. Of course, you do not need to know any of these, you just need to know that the four limit scenarios are exhaustive. 🙂</p>
+      </li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+    <h2>§III Formal argument for limits</h2>
+    <p>We are not starting from zero; we can make arguments for the limit of a sequence by leveraging our knowledge of functional limits. The key theorem is the following.</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #aaaaaa1a; border: .1em dashed #0f65a0; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">Given a sequence \(a_n\) and a function \(f(x)\) that interpolates it (that is \(f(n) = a_n\)), then <mark><strong>if</strong></mark> $$\lim_{x \to \infty} f(x) = L,$$ then we have $$\lim_{n \to \infty} a_n = \lim_{x \to \infty} f(x) = L.$$ The symbol \(L\) can be a finite number, \(\infty\), or \(-\infty\).</div>
+    <p>I want to bring your attention to the “if” clause in the above theorem. We can only apply the theorem when the “if” clause is satisfied—it is a promise that we are making when we apply the theorem, and we have to fulfill our promise. To show you an incorrect usage, let us say we are trying to find $$\lim_{n\to \infty} \cos(2 \pi n).$$ If we start our argument with $$\lim_{n\to \infty} \cos(2 \pi n) = \lim_{x\to \infty} \cos(2 \pi x),$$ then we are making a promise that \(\lim_{x\to \infty} \cos(2 \pi x)\) exists either as a finite number, \(\infty\), or \(-\infty\). However, the function \(\cos(2 \pi x)\) is oscillating and its limit does not exist. The reason why the argument $$\lim_{n\to \infty} \cos(2 \pi n) = \lim_{x\to \infty} \cos(2 \pi x) \quad \text{DNE}$$ is incorrect ❌ is because we applied the theorem without fulfilling its assumption—the promise we made.</p>
+    <figure>
+      <img src="/courses/1067114/files/30748402/preview" alt="Oscillating curve y = cos(2 pi x) and the sequence a_n = cos(2 pi n) whose points are on the peaks of the curve." width="300" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+      <figcaption>
+        <p style="text-align: center;">Figure 6: \(f(x) = \cos(2\pi x)\) passes through the points of the sequence \(a_n = \cos(2\pi n)\). While \(f(x)\) does not have a limit as \(x \to \infty\), the sequence surely looks like it has a limit.</p>
+      </figcaption>
+    </figure>
+    <p>The correct argument is to notice that \(\cos(2 \pi n) = 1\) for all natural numbers \(n\), and so actually \(f(x) = 1\) interpolates the sequence \(\cos(2 \pi n)\). Then we can apply the theorem to conclude that $$\lim_{n\to \infty} \cos(2 \pi n) = \lim_{x\to \infty} 1 = 1.$$ Notice that we fulfilled our promise that \(\lim_{x \to \infty} f(x) = \lim_{x\to \infty} 1 = 1\) exists, so this argument is correct ✅.</p>
+    <p>Not all sequences can be analyzed by this theorem. Two other theorems you need to know are the algebraic limit theorem and the sandwich theorem.</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #aaaaaa1a; border: .1em dashed #0f65a0; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;"><span style="color: #0f65a0;">(Algebraic Limit Theorem)</span> Given two sequences \(a_n\) and \(b_n\), if $$\lim_{n \to \infty} a_n = L \quad \text{and} \quad \lim_{n \to \infty} b_n = M,$$ and that \(L + M\) is not an indeterminate form, then we have $$\lim_{n \to \infty} (a_n + b_n) = \lim_{n \to \infty} a_n + \lim_{n \to \infty} b_n = L + M.$$ The same also applies to subtraction, multiplication, and division.</div>
+    <p>In the algebraic limit theorem, notice that we need to make three promises:</p>
+    <ol>
+      <li>\(\lim_{n \to \infty} a_n = L\) exists.</li>
+      <li>\(\lim_{n \to \infty} b_n = M\) exists.</li>
+      <li>\(L + M\) is not an indeterminate form.</li>
+    </ol>
+    <p>If we fail to fulfill any of the three promises when writing the argument, then the argument is incorrect and we have to try a different approach.</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #aaaaaa1a; border: .1em dashed #0f65a0; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;"><span style="color: #0f65a0;">(Sandwich Theorem)</span> Given three sequences \(a_n\), \(b_n\), and \(c_n\) such that \(a_n \leq b_n \leq c_n\) for all \(n\), if $$\lim_{n\to \infty} a_n = \lim_{n\to \infty} c_n = L,$$ then we have $$\lim_{n\to \infty} b_n = L.$$ Here, \(L\) can be a finite number, \(\infty\), or \(-\infty\).</div>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span> Find the limits of the following sequences or show that they do not exist.</p>
+    <ol>
+      <li>\(\displaystyle a_n = \frac{3n^2 + n}{1 + n^2}\)</li>
+      <li>\(\displaystyle a_n = \frac{\ln n}{n}\)</li>
+      <li>\(\displaystyle a_n = (-1)^{n - 1} \left(\frac{1}{n}\right)\)</li>
+      <li>\(\displaystyle a_n = (-1)^{n - 1} \left(1 + \frac{1}{n}\right)\)</li>
+      <li>\(\displaystyle a_n = \ln (n + 1) - \ln (n)\)</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>
+        <p>We have $$\lim_{n \to \infty} \frac{3n^2 + n}{1 + n^2} = \lim_{n \to \infty} \frac{n^2}{n^2} \cdot \frac{3 + 1/n}{1/n^2 + 1} = \lim_{n \to \infty} \frac{3 + 1/n}{1/n^2 + 1} = \frac{3 + 0}{0 + 1} = 3.$$ Note that this is an argument because all applications of algebraic limit theorem are fulfilled: there was no indeterminate form and all limits involved in the argument exist.</p>
+      </li>
+      <li>
+        <p>We have $$\lim_{n\to \infty} \frac{\ln n}{n} = \lim_{x\to \infty} \frac{\ln x}{x} = \lim_{x\to \infty} \frac{1/x}{1} = \frac{0}{1} = 0.$$ The first equality is not doing nothing! It is the application of the first theorem we introduced in this section. It is only by reframing the problem as the functional limit of \(\frac{\ln x}{x}\) that we can apply L’Hôpital’s rule in the second equality. L’Hôpital’s rule cannot be applied to sequential limits because it does not make sense to “take the derivative of a sequence”. Recall that derivative makes sense when slope makes sense.</p>
+        <div style="padding-left: 40px; padding-right: 40px; background: #ffdc0033; border: .1em dashed #ffdc00; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">L’Hôpital’s rule says that if $$\frac{\lim_{x\to \infty} f(x)}{\lim_{x\to \infty} g(x)}$$ is an indeterminate form like \(\frac{0}{0}\) or \(\frac{\infty}{\infty}\), then we can evaluate it by taking the derivative of the numerator and denominator separately and then taking the limit of the resulting fraction, that is $$\lim_{x\to \infty} \frac{f(x)}{g(x)} = \lim_{x\to \infty} \frac{f'(x)}{g'(x)}.$$ If you are not confident about this, it is time to review Section 4.5 of the textbook on “Indeterminate Forms and L’Hôpital’s Rule” (you can stop at page 257; there is no need to read about the proof). Try out the examples in that section as you read along!</div>
+      </li>
+      <li>
+        <p>This is exactly the sequence $$1, -\frac{1}{2}, \frac{1}{3}, -\frac{1}{4}, \frac{1}{5}, -\frac{1}{6}, \dots$$ that we encountered in the previous exercise. It is time to formally justify it. The idea is that this sequence is sandwiched between the two sequences \(1/n\) and \(-1/n\) as shown in the picture we drew in the previous section. Thus, we apply the sandwich theorem on $$-\frac{1}{n} \leq (-1)^{n - 1} \left(\frac{1}{n}\right) \leq \frac{1}{n}.$$ The left and right sequences both converge to \(0\): $$\begin{aligned}<br>\lim_{n\to \infty} -\frac{1}{n} = 0, \\<br>\lim_{n\to \infty} \frac{1}{n} = 0,<br>\end{aligned}$$ and so we conclude the limit of the middle sequence is also \(0\): $$\lim_{n\to \infty} (-1)^{n - 1} \left(\frac{1}{n}\right) = 0.$$</p>
+      </li>
+      <li>
+        <p>We can write down the first few terms of the sequence as $$1 + \frac{1}{1}, -\left(1 + \frac{1}{2}\right), 1 + \frac{1}{3}, -\left(1 + \frac{1}{4}\right), 1 + \frac{1}{5}, -\left(1 + \frac{1}{6}\right), \dots.$$ It alternates, so can we use the sandwich theorem? If we try to apply sandwich theorem on $$-\left(1 + \frac{1}{n}\right) \leq (-1)^{n - 1} \left(1 + \frac{1}{n}\right) \leq 1 + \frac{1}{n},$$ we will find that $$\begin{aligned}<br>\lim_{n\to \infty} -\left(1 + \frac{1}{n}\right) = -1, \\<br>\lim_{n\to \infty} \left(1 + \frac{1}{n}\right) = 1,<br>\end{aligned}$$ and since the two sides do not converge to the same limit, we actually cannot apply the sandwich theorem because we failed to fulfill the promise that \(\lim_{n\to \infty} a_n = \lim_{n\to \infty} c_n\) in the sandwich theorem.</p>
+        <p>Nevertheless, it inspires us to show that the limit does not exist because there might be two subsequences with different limits, namely, \(-1\) and \(1\).</p>
+        <ul>
+          <li>If we start with the first term and take every other term, we get the subsequence $$1 + \frac{1}{1}, 1 + \frac{1}{3}, 1 + \frac{1}{5}, 1 + \frac{1}{7}, \dots$$ which converges to \(1\).</li>
+          <li>If we start with the second term and take every other term, we get the subsequence $$-\left(1 + \frac{1}{2}\right), -\left(1 + \frac{1}{4}\right), -\left(1 + \frac{1}{6}\right), -\left(1 + \frac{1}{8}\right), \dots$$ which converges to \(-1\).</li>
+        </ul>
+        <p>Since the two subsequences have different limits, we conclude that the limit of the original sequence does not exist.</p>
+        <div style="padding-left: 40px; padding-right: 40px; background: #ffdc0033; border: .1em dashed #ffdc00; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">
+          <p>I consider the above solution acceptable. Both subsequences are simple enough that we do not have to justify that they converge. To justify, say, that the first subsequence converges, we can say the following.</p>
+          <p>If we take the first term and every other term, we get the subsequence \(a_1, a_3, a_5, \dots, a_{2n - 1}, \dots\). We calculate $$a_{2n - 1} = (-1)^{2n - 2} \left(1 + \frac{1}{2n - 1}\right) = 1 + \frac{1}{2n - 1},$$ and so $$\lim_{n \to \infty} a_{2n - 1} = \lim_{n \to \infty} \left(1 + \frac{1}{2n - 1}\right) = 1.$$</p>
+          <p>Can you write down a formal argument to justify the convergence of the second subsequence?</p>
+        </div>
+      </li>
+      <li>
+        <p>If we naively apply the algebraic limit theorem, we will get $$\lim_{n\to \infty} (\ln (n + 1) - \ln (n)) = \lim_{n\to \infty} \ln (n + 1) - \lim_{n\to \infty} \ln (n) = \infty - \infty.$$ This is an indeterminate form, so we actually cannot apply the algebraic limit theorem here. The key is to use the fact that $$\ln a - \ln b = \ln \frac{a}{b}$$ to rewrite the limit as $$\lim_{n\to \infty} (\ln (n + 1) - \ln (n)) = \lim_{n\to \infty} \ln \left( \frac{n + 1}{n} \right) = \lim_{n\to \infty} \ln \left(1 + \frac{1}{n}\right) = \ln 1 = 0.$$</p>
+        <p>We secretly snuck in the functional limit theorem which says that if \(f(x)\) is continuous and \(\lim_{n \to \infty} a_n = L\), then $$\lim_{n\to \infty} f(a_n) = f\left(\lim_{n\to \infty} a_n\right) = f(L).$$ Because \(\ln\) is continuous, we can simply evaluate \(\lim_{n\to \infty} \left( 1 + \frac{1}{n} \right) = 1\) <mark>(hence fulfilling the promise that \(\lim_{n\to \infty} a_n = L\) exists for the functional limit theorem!)</mark> and feed \(1\) into \(\ln\).</p>
+      </li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+  </body>
+</html>

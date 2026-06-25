@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAT 21C Discussion 3</title>
+    <meta name="authors" content="Chen Liang">
+  </head>
+  <body>
+    <h2>§I Warm-Up</h2>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Warm-up)</span> Consider the series $$1 - 1 + 1 - 1 + 1 - 1 + 1 - \cdots.$$ We know that the series diverges, but see if you can “deceive” someone into thinking that the value of the series is…</p>
+    <ol>
+      <li>\(0\)</li>
+      <li>\(1\)</li>
+      <li>\(2\)</li>
+      <li>\(-1\)</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>We can group the terms as $$(1 - 1) + (1 - 1) + (1 - 1) + \cdots = 0 + 0 + 0 + \cdots = 0.$$</li>
+      <li>We can group the terms as $$1 + (-1 + 1) + (-1 + 1) + \cdots = 1 + 0 + 0 + \cdots = 1.$$</li>
+      <li>We can split the series into two to get $$\begin{aligned}<br>1 &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; + \cdots \\<br>\, &amp; -1 &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \cdots<br>\end{aligned}$$ and then shift the second series to the right by one to get $$\begin{aligned}<br>1 &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; +\cdots \\<br>\, &amp; \phantom{-1} &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \cdots<br>\end{aligned}$$ Putting them back and cancel each \(-1\) with the next \(+1\), we get $$1 + 1 + (-1 + 1) + (-1 + 1) + \cdots = 2.$$</li>
+      <li>We again split the series into two to get $$\begin{aligned}<br>1 &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; +\cdots \\<br>\, &amp; -1 &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \cdots<br>\end{aligned}$$ and then shift the first series to the right by one to get $$\begin{aligned}<br>\phantom{1} &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; +1 &amp; \, &amp; +\cdots \\<br>\, &amp; -1 &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \, &amp; -1 &amp; \cdots<br>\end{aligned}$$ Putting them back and cancel each \(+1\) with the next \(-1\), we get $$-1 + (1 - 1) + (1 - 1) + (1 - 1) + \cdots = -1.$$</li>
+    </ol>
+    <p>Of course, none of the above manipulations are valid because the series diverges, and we can only do these moves if all the terms of the series are nonnegative so the series represents an <em>area</em> rather than a <em>procedure</em>.</p>
+    <hr style="border: 1px solid #c73834;">
+    <h2>§II Series with Negative Terms</h2>
+    <p>Consider the alternating harmonic series $$1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \frac{1}{5} - \frac{1}{6} + \frac{1}{7} - \frac{1}{8} + \cdots.$$ The alternating series test tells us that this series converges, and in fact, it converges to \(\ln(2)\) (the past discussion worksheet guides you through the proof, but I prefer to use my own discussion notes).</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #aaaaaa1a; border: .1em dashed #0f65a0; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">
+      <p><span style="color: #0f65a0;">(Alternating Series Test)</span> If \((a_1, a_2, a_3, \ldots)\) is a sequence that</p>
+      <ul>
+        <li>is positive (<em>i.e.</em> \(a_n > 0\)),</li>
+        <li>is decreasing, and</li>
+        <li>converges to \(0\),</li>
+      </ul>
+      <p>then the alternating series $$\sum_{n = 1}^{\infty} (-1)^{n+1} a_n = a_1 - a_2 + a_3 - a_4 + \cdots$$ converges. Additionally, if \((a_1, a_2, a_3, \ldots)\) does not tend to \(0\), then the series diverges.</p>
+      <p>The alternating series test also applies to \(\sum_{n = 1}^{\infty} (-1)^n a_n = -a_1 + a_2 - a_3 + a_4 - \cdots\).</p>
+    </div>
+    <p>You can think about how to prove that if \((a_1, a_2, a_3, \ldots)\) does not tend to \(0\), the alternating series diverges. It is not as simple as the \(n\)th term test, the missing gap is to prove that if \((a_1, a_2, a_3, a_4, \ldots)\) does not tend to \(0\), then \((a_1, -a_2, a_3, -a_4, \ldots)\) also does not tend to \(0\).</p>
+    <p>Let us do further analysis of the alternating harmonic series. We can collect the positive terms and the negative terms separately to get two bins: $$\begin{aligned}<br>\text{Positive bin: } &amp; 1, \frac{1}{3}, \frac{1}{5}, \frac{1}{7}, \frac{1}{9}, \ldots, \\<br>\text{Negative bin: } &amp; -\frac{1}{2}, -\frac{1}{4}, -\frac{1}{6}, -\frac{1}{8}, \ldots.<br>\end{aligned}$$ The positive bin consists of the terms with odd denominators \(\frac{1}{2n+1}\) and the negative bin consists of the terms with even denominators \(-\frac{1}{2n}\). If we try to sum up the positive bin, we would get \(\infty\) by comparison with \(\sum \frac{1}{2n}\) (which diverges by integral test or further comparison with \(p\)-series \(\sum \frac{1}{n}\)). Similarly, the negative bin also diverges. We can leverage this observation to rearrange the terms to get any value we want!</p>
+    <p>Let us say, we want to rearrange the terms to get \(0\), then we can do the following:</p>
+    <ol>
+      <li>Take the first term from either bin and start summing up. We will start with \(1\).</li>
+      <li>If our current sum is greater than \(0\), we take as much as we need from the negative bin to make the sum less than (or equal to) \(0\). In this case, we need to take \(-\frac{1}{2}\) through \(-\frac{1}{8}\) to get $$1 - \frac{1}{2} - \frac{1}{4} - \frac{1}{6} - \frac{1}{8} = -0.041666\dots.$$</li>
+      <li>If our current sum is less than (or equal to) \(0\), we take as much as we need from the positive bin to make the sum greater than \(0\). In this case, we just need to take \(\frac{1}{3}\) to get $$1 - \frac{1}{2} - \frac{1}{4} - \frac{1}{6} - \frac{1}{8} + \frac{1}{3} = 0.291667333\dots.$$</li>
+      <li>We repeat the above two steps indefinitely, and we will get $$1 - \frac{1}{2} - \frac{1}{4} - \frac{1}{6} - \frac{1}{8} + \frac{1}{3} - \frac{1}{10} - \frac{1}{12} - \frac{1}{14} - \frac{1}{16} \approx -0.025595\dots$$ and then $$1 - \frac{1}{2} - \frac{1}{4} - \frac{1}{6} - \frac{1}{8} + \frac{1}{3} - \frac{1}{10} - \frac{1}{12} - \frac{1}{14} - \frac{1}{16} + \frac{1}{5} \approx 0.174404\dots$$ and so on.</li>
+    </ol>
+    <p>This process will produce a series that converges to \(0\). The key is that because both bins diverge, when we are in step 2 or step 3, we always can take finitely many terms to get the sum to the other side of \(0\).</p>
+    <figure>
+      <img src="/courses/1067114/files/30860789/preview" alt="Points in the xy-plane. From left to right, the points decrease in y but it shoots up whenever it goes below the x-axis." width="80%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+      <figcaption>
+        <p style="text-align: center;">Figure 1: The modified series \(1 - \frac{1}{2} - \frac{1}{4} - \frac{1}{6} - \frac{1}{8} + \frac{1}{3} - \frac{1}{10} - \cdots\). The \(y\)-values of the points correspond to the partial sums, and we see that they tend towards \(0\).</p>
+      </figcaption>
+    </figure>
+    <p>We can in fact rearrange the terms to get any value we want! This is similar to the warm-up question where we can rearrange the terms to get \(0\), \(1\), \(2\), or \(-1\). The moral of the story is that series with negative terms can be very ill-behaved.</p>
+    <p>However, some series with negative terms are nice and are protected from rearrangement: if both the positive bin and the negative bin converge to finite values, or equivalently, if the series converge absolutely.</p>
+    <ul>
+      <li>We say that a series \(\sum a_n\) <strong>converges absolutely</strong> if the series of absolute values \(\sum \lvert a_n \rvert\) converges.</li>
+      <li>We say that a series \(\sum a_n\) <strong>converges conditionally</strong> if the series converges but does not converge absolutely.</li>
+    </ul>
+    <p>When a series converges absolutely, both the positive bin and the negative bin converge, and the series would converge and is just the difference of the two bins. This is called the <strong>absolute convergence test</strong>, but I hope that I made it an intuitive enough result that you do not need to hardcode the theorem in your head.</p>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span> Determine whether the series converges absolutely, converges conditionally, or diverges.</p>
+    <ol>
+      <li>\(\displaystyle \frac{1}{\sqrt{2}} - \frac{1}{\sqrt{3}} + \frac{1}{\sqrt{4}} - \frac{1}{\sqrt{5}} + \cdots\)</li>
+      <li>\(\displaystyle \sum_{n = 1}^{\infty} (-1)^n \frac{n + 1}{2 n}\)</li>
+      <li>\(\displaystyle \sum_{n = 1}^{\infty} (-1)^n \frac{\cos(\pi n)}{n!}\)</li>
+      <li>(Bonus) \(\displaystyle \frac{1}{1} - \frac{3}{2} + \frac{1}{3} - \frac{3}{4} + \frac{1}{5} - \frac{3}{6} + \frac{1}{7} - \frac{3}{8} + \cdots\)</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>
+        <p>It is alternating and the magnitude of the terms \(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{3}}, \frac{1}{\sqrt{4}}, \ldots\) is</p>
+        <ul>
+          <li>decreasing because the denominator \(\sqrt{n}\) is increasing, and</li>
+          <li>converging to \(0\) because the denominator \(\sqrt{n}\) goes to infinity.</li>
+        </ul>
+        <p>So the series converges by the alternating series test. We still need to determine whether it converges absolutely or conditionally. The series of absolute values is $$\sum_{n=2}^{\infty} \frac{1}{\sqrt{n}} = \frac{1}{\sqrt{2}} + \frac{1}{\sqrt{3}} + \frac{1}{\sqrt{4}} + \cdots,$$ which diverges by the \(p\)-series test with \(p = \frac{1}{2} &lt; 1\). So the original series only converges conditionally.</p>
+      </li>
+      <li>The series $$\sum_{n = 1}^{\infty} (-1)^n \frac{n + 1}{2 n} = -\frac{2}{2} + \frac{3}{4} - \frac{4}{6} + \frac{5}{8} - \frac{6}{10} + \cdots$$ is alternating (we can know without writing it out because \(\frac{n + 1}{2n}\) is positive), but since $$\lim_{n \to \infty} \frac{n + 1}{2 n} = \lim_{n \to \infty} \frac{n}{n} \frac{1 + \frac{1}{n}}{2} = \frac{1}{2} \neq 0,$$ the series diverges.</li>
+      <li>The series $$\begin{aligned}<br>\sum_{n = 1}^{\infty} (-1)^n \frac{\cos(\pi n)}{n!} &amp;= -\frac{-1}{1!} + \frac{1}{2!} - \frac{-1}{3!} + \frac{1}{4!} - \frac{-1}{5!} + \cdots \\<br>&amp;= \frac{1}{1!} + \frac{1}{2!} + \frac{1}{3!} + \frac{1}{4!} + \frac{1}{5!} + \cdots<br>\end{aligned}$$ is actually not alternating. If we were trying to apply the alternating series test, the failure point is that \(\frac{\cos(\pi n)}{n!}\) is not positive. Now, the series $$\frac{1}{1!} + \frac{1}{2!} + \frac{1}{3!} + \frac{1}{4!} + \frac{1}{5!} + \cdots = \sum_{n = 1}^{\infty} \frac{1}{n!}$$ converges absolutely by the ratio test because $$\lim_{n \to \infty}\left\lvert \frac{1}{(n+1)!} \cdot \frac{n!}{1} \right\rvert = \lim_{n \to \infty} \frac{1}{n+1} = 0 &lt; 1.$$</li>
+      <li>
+        <p>The series $$\frac{1}{1} - \frac{3}{2} + \frac{1}{3} - \frac{3}{4} + \frac{1}{5} - \frac{3}{6} + \frac{1}{7} - \frac{3}{8} + \cdots$$ is alternating but the magnitude of the terms $$\frac{1}{1}, \frac{3}{2}, \frac{1}{3}, \frac{3}{4}, \frac{1}{5}, \frac{3}{6}, \ldots$$ is not decreasing, so we cannot apply the alternating series test. The terms do converge to \(0\) because the denominator goes to infinite while the numerator is at most \(3\), so the \(n\)th term test is also inconclusive. Ratio and root tests are also inconclusive, and the integral test is not applicable because the terms are not decreasing. It does not look like a telescoping series, and we are left with taking the absolute value and do comparison test.</p>
+        <p>We see that $$\frac{1}{1} + \frac{3}{2} + \frac{1}{3} + \frac{3}{4} + \frac{1}{5} + \frac{3}{6} + \cdots \geq \frac{1}{1} + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \frac{1}{5} + \frac{1}{6} + \cdots = \infty$$ diverges by comparison with the \(p\)-series with \(p = 1\), so the original series does not converge absolutely.</p>
+        <p>It is a genuinely difficult question to determine whether the original series converges conditionally or diverges. The key is to write it in a closed form by noticing that \(2 - (-1)^{n+1}\) alternates between \(1\) and \(3\), so we can write the original series as $$\frac{1}{1} - \frac{3}{2} + \frac{1}{3} - \frac{3}{4} + \frac{1}{5} - \frac{3}{6} + \frac{1}{7} - \frac{3}{8} + \cdots = \sum_{n = 1}^{\infty} (-1)^{n+1} \frac{2 - (-1)^{n+1}}{n}.$$ Then, we can try to apply the algebraic limit theorem to rewrite the series as $$\sum_{n = 1}^{\infty} (-1)^{n+1} \frac{2 - (-1)^{n+1}}{n} = \sum_{n = 1}^{\infty} (-1)^{n+1} \frac{2}{n} - \sum_{n = 1}^{\infty} \frac{1}{n}.$$ The first series \(\sum_{n = 1}^{\infty} (-1)^{n+1} \frac{2}{n}\) converges to some finite number \(L\) by the alternating series test, and the second series \(\sum_{n = 1}^{\infty} \frac{1}{n} = \infty\) diverges by the \(p\)-series test with \(p = 1\). Since \(L - \infty = -\infty\) is not an indeterminate form, the algebraic limit theorem succeeds and tells us that the original series diverges to \(-\infty\).</p>
+      </li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+    <h2>§III Choosing the Right Test</h2>
+    <p>Don’t worry about choosing the right test because there is no the right test. It is more important that we know when a test would not work so that we can just try another test.</p>
+    <p>Take the series $$\sum_{n=1}^{\infty} \frac{n!}{n^n}$$ for example (and it is a relatively difficult example). Here are the steps I would go through in my head.</p>
+    <ul>
+      <li>We always start with the \(n\)th term test. It is not obvious whether \(\frac{n!}{n^n}\) converges to \(0\) because both the numerator and the denominator go to infinity, so I have to leave it. (In fact, it does go to \(0\) because we will show that it converges.)</li>
+      <li>We see the factorial and we know that it is not the integral test because we cannot integrate factorial, and it is not the root test because we did not learn anything about \((n!)^{1/n}\). This leaves us with the comparison test and the ratio test.</li>
+      <li>The ratio test will be the most straightforward one, we just compute $$\lim_{n \to \infty} \left\lvert \frac{(n+1)!}{(n+1)^{n+1}} \cdot \frac{n^n}{n!} \right\rvert = \lim_{n \to \infty} \frac{(n+1) n^n}{(n+1)^{n+1}} = \lim_{n \to \infty} \left( \frac{n}{n+1} \right)^{n}.$$ If at this point, we do not recognize that we can aim for rewriting it into $$\lim_{n \to \infty} \left( 1 + \frac{x}{n} \right)^{n} = e^x$$ then we would be stuck and we would have to try the comparison test. If we do recognize that, we can rewrite $$\lim_{n \to \infty} \left( \frac{n}{n+1} \right)^{n} = \lim_{n \to \infty} \frac{1}{\left( \frac{n+1}{n} \right)^{n}} = \lim_{n \to \infty} \frac{1}{\left( 1 + \frac{1}{n} \right)^{n} } = \frac{1}{e} &lt; 1.$$ Since the limit is less than \(1\), the series converges.</li>
+      <li>If we were stuck at the ratio test and have to try the comparison test, we can do this as well. We just note that $$\frac{n!}{n^n} = \left( \frac{1}{n} \cdot \frac{2}{n} \right) \cdot \left( \frac{3}{n} \cdot \frac{4}{n} \cdot \cdots \cdot \frac{n-1}{n} \cdot \frac{n}{n} \right) \leq \frac{2}{n^2}$$ for sufficiently large \(n\) (all the \(n\) greater than \(2\)). Since \(\sum_{n = 1}^{\infty} \frac{2}{n^2}\) converges by the \(p\)-series test (with \(p = 2\)), the original series also converges by the direct comparison test.</li>
+    </ul>
+    <p>In general, I prioritize the tests that can fail faster such as</p>
+    <ul>
+      <li>the \(n\)th term test,</li>
+      <li>the alternating series test (but if the questions ask whether the series converges absolutely or conditionally, then we would need to take the absolute value and apply other tests anyway),</li>
+      <li>the ratio test, and</li>
+      <li>the root test,</li>
+      <li>the integral test (if it is easy).</li>
+    </ul>
+    <p>I would not literally do them on paper. I would just think whether the ratio, or the root, or the integral is simple to calculate, and if they are not simple, then I will try to be creative and try</p>
+    <ul>
+      <li>direct/limit comparison test with geometric or \(p\)-series or something easy to integrate,</li>
+      <li>checking whether it is a telescoping series.</li>
+    </ul>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span> Determine whether the following series converge or diverge. Try to come up with as many different methods as you can think of.</p>
+    <ol>
+      <li>\(\displaystyle \sum_{n=1}^{\infty} \frac{n}{e^n}\)</li>
+      <li>\(\displaystyle \sum_{n=1}^{\infty} \frac{\ln n}{n^2}\)</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>
+        <p><em>(Method 1: ratio test)</em> We compute $$\lim_{n \to \infty} \left\lvert \frac{n+1}{e^{n+1}} \cdot \frac{e^n}{n} \right\rvert = \lim_{n \to \infty} \frac{n+1}{n} \cdot \frac{1}{e} = \frac{1}{e} &lt; 1,$$ so the series converges absolutely by the ratio test.</p>
+        <p><em>(Method 2: root test)</em> We compute $$\lim_{n \to \infty} \left\lvert \frac{n}{e^n} \right\rvert^{1/n} = \lim_{n \to \infty} \frac{n^{1/n}}{e}.$$ We handle the indeterminate form \(\infty^0\) by exponentiating its logarithm: $$\lim_{n \to \infty} n^{1/n} = \lim_{n \to \infty} e^{\ln(n^{1/n})} = \lim_{n \to \infty} e^{\frac{1}{n} \ln n}$$ and then handle the indeterminate form \(\frac{\infty}{\infty}\) by L’Hôpital’s rule: $$\lim_{n \to \infty} \frac{\ln n}{n} \stackrel{\text{LH}}{=} \lim_{n \to \infty} \frac{1/n}{1} = 0 \implies \lim_{n \to \infty} n^{1/n} = e^0 = 1.$$ Therefore, the original limit is $$\lim_{n \to \infty} \left\lvert \frac{n}{e^n} \right\rvert^{1/n} = \frac{1}{e} &lt; 1,$$ so the series converges absolutely by the root test.</p>
+        <p><em>(Method 3: comparison test)</em> Intuition tells us that exponential functions grow faster than polynomials and we can break \(e^n\) into \(e^{n/2} e^{n/2}\) and the idea is that $$\frac{n}{e^x} = \frac{n}{e^{n/2}} \cdot \frac{1}{e^{n/2}} \ll \frac{1}{e^{n/2}}.$$</p>
+        <div style="padding-left: 40px; padding-right: 40px; background: #ffdc0033; border: .1em dashed #ffdc00; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">The intuition we should have about sequence growth is that $$\text{constant} \ll \ln n \ll \cdots \ll n^{1/3} \ll n^{1/2} \ll n \ll n^2 \ll n^3 \ll \cdots \ll e^n \ll n!$$ where \(a_n \ll b_n\) means that $$\lim_{n \to \infty} \frac{a_n}{b_n} = 0.$$ Knowing this is extremely powerful to find the right comparison series.</div>
+        <p>To formally justify this, we use limit comparison test with \(\sum \frac{1}{e^{n/2}}\). Using \(a_n = \frac{n}{e^n}\) and \(b_n = \frac{1}{e^{n/2}}\), we compute $$\lim_{n \to \infty} \frac{a_n}{b_n} = \lim_{n \to \infty} \frac{n}{e^{n}} \cdot e^{n/2} = \lim_{n \to \infty} \frac{n}{e^{n/2}} \stackrel{\text{LH}}{=} \lim_{n \to \infty} \frac{1}{\frac{1}{2} e^{n/2}} = 0.$$ Therefore, indeed \(a_n \ll b_n\), so if \(\sum b_n\) converges, then \(\sum a_n\) also converges. Since $$\sum_{n=1}^{\infty} \frac{1}{e^{n/2}} = \sum_{n=1}^{\infty} \left( \frac{1}{\sqrt{e}} \right)^n$$ is a geometric series with ratio \(\frac{1}{\sqrt{e}} &lt; 1\), it converges. Hence, the original series converges by the limit comparison test.</p>
+        <p><em>(Method 4: integral test)</em> We expect \(\frac{n}{e^n}\) to be decreasing at some point. We can compute the derivative of the function \(f(x) = \frac{x}{e^x} = x e^{-x}\) to find that $$f'(x) = e^{-x} - x e^{-x} = e^{-x} (1 - x) &lt; 0 \text{ for } x > 1,$$ so it is decreasing for \(x > 1\). Therefore, the integral test tells us that (you do not need to write this inequality if you are just interested in convergence, see part 2 for a usage of the integral test without writing the inequality) $$\int_{1}^{\infty} x e^{-x} \, dx \leq \sum_{n=1}^{\infty} \frac{n}{e^n} \leq \frac{1}{e} + \int_{1}^{\infty} x e^{-x} \, dx.$$ Evaluating the integral by integration by parts, we get $$\begin{aligned}<br>\int_{1}^{\infty} x e^{-x} \, dx &amp;= \lim_{b \to \infty} [-x e^{-x} ]_{1}^{b} + \int_{1}^{\infty} e^{-x} \, dx \\<br>&amp;= \lim_{b \to \infty} \left( [-x e^{-x} ]_{1}^{b} + [-e^{-x}]_{1}^{b} \right) \\<br>&amp;= \lim_{b \to \infty} \left( -\frac{b}{e^b} + \frac{1}{e} - \frac{1}{e^b} + \frac{1}{e} \right) = \frac{2}{e}.<br>\end{aligned}$$ Therefore, the original series converges and its value is between \(\frac{2}{e}\) and \(\frac{3}{e}\).</p>
+      </li>
+      <li>
+        <p><em>(Method 1: comparison test)</em> Intuition tells us that \(\ln n\) grows slower than any \(x^p\) for \(p > 0\), so we can try to break \(n^2\) into \(n^{1/2} n^{3/2}\) and argue that $$\frac{\ln n}{n^2} = \frac{\ln n}{n^{1/2}} \cdot \frac{1}{n^{3/2}} \ll \frac{1}{n^{3/2}}.$$ For the formal argument, we use limit comparison test with \(\sum \frac{1}{n^{3/2}}\). Using \(a_n = \frac{\ln n}{n^2}\) and \(b_n = \frac{1}{n^{3/2}}\), we compute $$\lim_{n \to \infty} \frac{a_n}{b_n} = \lim_{n \to \infty} \frac{\ln n}{n^2} \cdot n^{3/2} = \lim_{n \to \infty} \frac{\ln n}{n^{1/2}} \stackrel{\text{LH}}{=} \lim_{n \to \infty} \frac{1/n}{\frac{1}{2} n^{-1/2}} = \lim_{n \to \infty} \frac{2}{n^{1/2}} = 0.$$ Therefore, indeed \(a_n \ll b_n\), so if \(\sum b_n\) converges, then \(\sum a_n\) also converges. Since \(\sum_{n=1}^{\infty} \frac{1}{n^{3/2}}\) converges by the \(p\)-series test with \(p = \frac{3}{2} > 1\), the original series also converges by the limit comparison test.</p>
+        <p><em>(Method 2: integral test)</em> We compute the derivative of the function \(f(x) = \frac{\ln x}{x^2}\) to find that $$f'(x) = \frac{1}{x^3} - \frac{2 \ln x}{x^3} = \frac{1 - 2 \ln x}{x^3} &lt; 0 \text{ for } x > e^{1/2}.$$ Now, \(e^{1/2}\) is somewhere between \(1\) and \(2\), but we can say for sure that \(f(x)\) is decreasing starting from \(2\). Therefore, the integral test tells us that $$\int_{2}^{\infty} \frac{\ln x}{x^2} \, dx \text{ converges} \iff \sum_{n=2}^{\infty} \frac{\ln n}{n^2} \text{ converges} \iff \sum_{n=1}^{\infty} \frac{\ln n}{n^2} \text{ converges}.$$ We calculate using the substitution \(u = \ln x\) and \(du = \frac{1}{x} dx\) to get $$\int_{2}^{\infty} \frac{\ln x}{x^2} \, dx = \int_{\ln 2}^{\infty} \frac{u}{e^u} \, du.$$ This is the same integrand as the one we evaluated in part 1. We can show that it converges by direct calculation again or we can be extremely clever and turn the question of whether an integral converges into a question of whether a series converges and then apply ratio or root test.</p>
+        <p>If we want to do direct calculation, we get $$\int_{\ln 2}^{\infty} \frac{u}{e^u} \, du = \lim_{b \to \infty} [-u e^{-u} - e^{-u}]_{\ln 2}^{b} = \frac{\ln 2 + 1}{2}.$$ Therefore, the original series converges.</p>
+        <p>If we want to be extremely clever, we can write $$\int_{\ln 2}^{\infty} \frac{u}{e^u} \, du \leq \int_{\ln 2}^{1} \frac{u}{e^u} \, du + \int_{1}^{\infty} \frac{u}{e^u} \, du<br>\leq \int_{\ln 2}^{1} \frac{u}{e^u} \, du + \sum_{n=1}^{\infty} \frac{n}{e^n}.$$ The first integral is finite because \(\frac{u}{e^u}\) is a continuous function with no singularity on the interval \([\ln 2, 1]\), and the second series converges by ratio test or root test.</p>
+      </li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+  </body>
+</html>

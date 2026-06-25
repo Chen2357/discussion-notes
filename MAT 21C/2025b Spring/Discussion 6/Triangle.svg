@@ -1,0 +1,15 @@
+<svg class="typst-doc" viewBox="0 0 228.07165354330706 121.01181102362204" width="228.07165354330706pt" height="121.01181102362204pt" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:h5="http://www.w3.org/1999/xhtml">
+    <path class="typst-shape" fill="#ffffff00" fill-rule="nonzero" d="M 0 0v 121.01181 h 228.07166 v -121.01181 Z "/>
+    <g>
+        <g class="typst-group" transform="matrix(1 0 0 1 0.5 5)">
+            <g>
+                <path class="typst-shape" fill="#cce3f7" fill-rule="nonzero" stroke="#000000" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" transform="matrix(1 0 0 1 0 2.125984251968504)" d="M 0 0m 0 111.25984 h 170.07874 l -113.38582 -113.385826 l -56.692913 113.385826 Z "/>
+                <path class="typst-shape" fill="none" stroke="#0074d9" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" transform="matrix(1 0 0 1 0 2.125984251968504)" d="M 0 0m 0 111.25984 h 168.65468 "/>
+                <path class="typst-shape" fill="none" stroke="#0074d9" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" transform="matrix(1 0 0 1 162.98544819401576 4.251968503937008)" d="M 0 0m 0 107.00787 l 5.6692915 2.1259842 l -5.6692915 2.1259842 "/>
+                <path class="typst-shape" fill="none" stroke="#0074d9" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" transform="matrix(1 0 0 1 0 2.125984251968504)" d="M 0 0m 0 111.25984 l 56.056057 -112.112114 "/>
+                <path class="typst-shape" fill="none" stroke="#0074d9" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" transform="matrix(1 0 0 1 51.61915866259842 -103.96464025145669)" d="M 0 0m 0 109.35831 l 4.436922 -4.1200027 l -0.6338458 6.021538 "/>
+                <path class="typst-shape" fill="none" stroke="#0074d9" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" transform="matrix(1 0 0 1 0 2.125984251968504)" d="M 0 0m 0 111.25984 h 170.07874 l 56.692917 -113.385826 h -170.07874 l -56.692913 113.385826 Z "/>
+            </g>
+        </g>
+    </g>
+</svg>

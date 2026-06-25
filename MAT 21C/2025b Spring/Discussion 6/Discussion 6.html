@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAT 21C Discussion 6</title>
+    <meta name="authors" content="Chen Liang">
+  </head>
+  <body>
+    <h2>§I Warm-Up</h2>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Warm-up)</span> Explain why \(x = 0\) describes a plane in three-dimensional space and sketch the plane.</p>
+    <figure><img src="/courses/1067114/files/31109442/preview" alt="Three axes in three-dimensional space" width="40%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;"></figure>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span> A point is in the the region described by an equation (or equations) if the coordinates of the point satisfy the equation(s). For example, the point \((1, 0, 0)\) is not in the region because if we substitute \(1\) for \(x\) (and \(0\) for \(y\) and \(z\) but they are not present in the equation), we get \(1 = 0\), which is false. In contrast, the point \((0, 1, 1)\) is in the region because if we substitute \(0\) for \(x\), we get \(0 = 0\), which is true.</p>
+    <p>In general, a point is in the region described by \(x = 0\) if the point lies in the \(yz\)-plane (like \((0, 1, 1)\) and not in the region when it is not (like \((1, 0, 0)\)). Thus, the region described by \(x = 0\) is the \(yz\)-plane.</p>
+    <figure>
+      <img src="/courses/1067114/files/31109441/preview" alt="Three axes in three-dimensional space with the yz-plane shaded in red" width="40%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+      <figcaption>
+        <p style="text-align: center;">Figure 2: The plane is the \(yz\)-plane and is shaded in red.</p>
+      </figcaption>
+    </figure>
+    <hr style="border: 1px solid #c73834;">
+    <h2>§II Dot Product</h2>
+    <p>Given a vector \(\vec{a} = \langle a_1, a_2, a_3 \rangle\), the length of the projection of \(\vec{a}\) onto the unit vector \(\hat{i}\) pointing in the \(x\)-direction is simply \(a_1\).</p>
+    <figure>
+      <img src="/courses/1067114/files/31109528/preview" alt="A gray line is drawn from the tip of vector a to the tip of the projection, forming a right angle with the projection." width="40%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+      <figcaption>
+        <p style="text-align: center;">Figure 3: The length of the projection of \(\vec{a}\) onto \(\hat{i}\) is \(a_1\).</p>
+      </figcaption>
+    </figure>
+    <p>This is codified in the dot product $$\vec{a} \cdot \hat{i} = a_1.$$ The general definition of dot product is that $$\vec{a} \cdot \vec{b} = a_1 b_1 + a_2 b_2 + a_3 b_3,$$ and we can verify that indeed $$\vec{a} \cdot \hat{i} = \langle a_1, a_2, a_3 \rangle \cdot \langle 1, 0, 0 \rangle = a_1 \cdot 1 + a_2 \cdot 0 + a_3 \cdot 0 = a_1.$$ The geometric interpretation that dot product is the length of the projection still holds if we replace \(\hat{i}\) with any other unit vector \(\hat{u}\): $$\text{signed length of projection of } \vec{a} \text{ onto } \hat{u} = \vec{a} \cdot \hat{u} = \lvert \vec{a} \rvert \cos \theta$$ where \(\theta\) is the angle between \(\vec{a}\) and \(\hat{u}\) and the “signed” length is positive if the angle is acute and negative if the angle is obtuse.</p>
+    <p>Even when \(\vec{b}\) is not a unit vector, we can still normalize \(\vec{b}\) and get the formula $$\text{signed length of projection of } \vec{a} \text{ onto } \vec{b} = \vec{a} \cdot \frac{ \vec{b}}{\lvert \vec{b} \rvert} = \lvert \vec{a} \rvert \cos \theta$$ where \(\theta\) is now the angle between \(\vec{a}\) and \(\vec{b}\).</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #ffdc0033; border: .1em dashed #ffdc00; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">We can rearrange the above formula to get a symmetric form $$\vec{a} \cdot \vec{b} = \lvert \vec<br>{a} \rvert \lvert \vec{b} \rvert \cos \theta.$$ This is useful when the question asks for the angle between two vectors.</div>
+    <p>An important consequence of the geometric understanding of the dot product is that two vectors \(\vec{a}\) and \(\vec{b}\) are orthogonal (length of projection is \(0\)) precisely when \(\vec{a} \cdot \vec{b} = 0\).</p>
+    <p>Another way to understand the warm-up question is that we can rewrite the equation \(x = 0\) as \(\langle x, y, z \rangle \cdot \langle 1, 0, 0 \rangle = 0\), which means that the plane described by \(x = 0\) consists of all points whose displacement from the origin is orthogonal to \(\langle 1, 0, 0 \rangle\). In general, given a nonzero vector in three-dimensional space, the set of all points whose displacement from the origin is orthogonal to the vector forms a plane.</p>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span></p>
+    <ol>
+      <li>
+        <p>Which of the following points are on the plane described by \(2 x + y - z = 5\)?</p>
+        <ul>
+          <li>\((2, 1, -1)\)</li>
+          <li>\((2, 1, 0)\)</li>
+          <li>\((1, 3, 5)\)</li>
+        </ul>
+      </li>
+      <li>Explain why \(2x + y - z = 0\) describes a plane in three-dimensional space.</li>
+      <li>Explain why \(2x + y - z = 5\) describes a plane in three-dimensional space.</li>
+      <li>Find the projection of \(\langle 3, 4, 4 \rangle\) onto \(\langle 2, 1, -1 \rangle\).</li>
+      <li>Find the projection of \(\langle 3, 4, 4 \rangle\) onto the plane described by \(2x + y - z = 0\).</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>
+        <p>We can check if a point is on the plane by substituting the coordinates of the point into the equation of the plane and checking if the equation holds.</p>
+        <ul>
+          <li>For \((2, 1, -1)\), we have \(2 \cdot 2 + 1 \cdot 1 - (-1) = 6\), which is not equal to \(5\), so \((2, 1, -1)\) is not on the plane.</li>
+          <li>For \((2, 1, 0)\), we have \(2 \cdot 2 + 1 \cdot 1 - 0 = 5\), which is equal to \(5\), so \((2, 1, 0)\) is on the plane.</li>
+          <li>For \((1, 3, 5)\), we have \(2 \cdot 1 + 1 \cdot 3 - 5 = 0\), which is not equal to \(5\), so \((1, 3, 5)\) is not on the plane.</li>
+        </ul>
+      </li>
+      <li>We can rewrite the equation \(2x + y - z = 0\) and \(\langle x, y, z \rangle \cdot \langle 2, 1, -1 \rangle = 0\). This means that the plane described by \(2x + y - z = 0\) consists of all points whose displacement from the origin is orthogonal to \(\langle 2, 1, -1 \rangle\). Thus, the region described by \(2x + y - z = 0\) is a plane.</li>
+      <li>
+        <p>We can rewrite the equation \(2x + y - z = 5\) as \(\langle x, y, z \rangle \cdot \langle 2, 1, -1 \rangle = 5\), but we do not really have a geometric interpretation for such equation yet. However, we can normalize the vector \(\langle 2, 1, -1 \rangle\) by dividing both sides by the length \(\lvert \langle 2, 1, -1 \rangle \rvert = \sqrt{2^2 + 1^2 + (-1)^2} = \sqrt{6}\) to get $$\langle x, y, z \rangle \cdot \frac{\langle 2, 1, -1 \rangle}{\sqrt{6}} = \frac{5}{\sqrt{6}}.$$ We do have a geometric interpretation for taking the dot product with a unit vector, and it is that the equation describes all the points whose displacement from the origin has a fixed length of projection onto the unit vector \(\langle 2, 1, -1 \rangle\), and that fixed length is \(5 / \sqrt{6}\). Drawing a picture reveals that these points form a plane.</p>
+        <figure>
+          <img src="/courses/1067114/files/31109436/preview" alt="A plane and an orthogonal vector, the distance from the base of the vector to the their intersection is labeled as 5 / sqrt(6)." width="40%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+          <figcaption>
+            <p style="text-align: center;">Figure 4: The vector \(\langle 2, 1, -1 \rangle\) is drawn based at the origin, and the plane \(2x + y - z = 5\) is shown in red and extends orthogonally out of the page.</p>
+          </figcaption>
+        </figure>
+      </li>
+      <li>We can find the length of projection of \(\langle 3, 4, 4 \rangle\) onto \(\langle 2, 1, -1 \rangle\) by $$\langle 3, 4, 4 \rangle \cdot \frac{\langle 2, 1, -1 \rangle}{\sqrt{6}} = \frac{3 \cdot 2 + 4 \cdot 1 + 4 \cdot (-1)}{\sqrt{6}} = \frac{6}{\sqrt{6}} = \sqrt{6}.$$ Thus, the projection of \(\langle 3, 4, 4 \rangle\) onto \(\langle 2, 1, -1 \rangle\) is the length of projection multiplied by the unit vector pointing in the direction of \(\langle 2, 1, -1 \rangle\), which is $$\sqrt{6} \cdot \frac{\langle 2, 1, -1 \rangle}{\sqrt{6}} = \langle 2, 1, -1 \rangle.$$</li>
+      <li>
+        <p>By examining the following picture, we see that the sum of the projection of \(\langle 3, 4, 4 \rangle\) onto a plane and the projection onto the normal vector of the plane should be \(\langle 3, 4, 4 \rangle\). In technical terms, a vector can always be decomposed into a component parallel to a vector and a component orthogonal to the vector.</p>
+        <figure>
+          <img src="/courses/1067114/files/31109438/preview" alt="Two projections of a vector are orthogonal, and they form a rectangle whose diagonal is the original vector." width="50%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+          <figcaption>
+            <p style="text-align: center;">Figure 5: The projection of \(\langle 3, 4, 4 \rangle\) onto \(\langle 2, 1, -1 \rangle\) (which is \(\langle 2, 1, -1 \rangle\) in this case) plus the projection of \(\langle 3, 4, 4 \rangle\) onto the plane (in red) gives us back \(\langle 3, 4, 4 \rangle\).</p>
+          </figcaption>
+        </figure>
+        <p>Thus, the projection \(\vec{v}\) of the vector \(\langle 3, 4, 4 \rangle\) onto the plane is given by $$\langle 2, 1, -1 \rangle + \vec{v} = \langle 3, 4, 4 \rangle.$$ Solving for \(\vec{v}\) either by just thinking about it or doing subtraction gives us $$\vec{v} = \langle 1, 3, 5 \rangle.$$</p>
+      </li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+    <h2>§III Cross Product</h2>
+    <p>Cross product between two vectors \(\vec{a}\) and \(\vec{b}\) calculates the area of the parallelogram described by \(\vec{a}\) and \(\vec{b}\) and the direction perpendicular to the parallelogram according to the right hand rule.</p>
+    <figure>
+      <img src="/courses/1067114/files/31109435/preview" alt="Two vectors in the xy-plane and their cross product pointing in the z-direction." width="60%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+      <figcaption>
+        <p style="text-align: center;">Figure 6: The cross product of two vectors in the \(xy\)-plane is a vector in the \(z\)-direction, and the length of the cross product is the area of the parallelogram described by the two vectors.</p>
+      </figcaption>
+    </figure>
+    <p>For example in the above picture, we have $$3 \hat{i} \times (\hat{i} + 2\hat{j}) = 6 \hat{k}$$ because the parallelogram described by \(3 \hat{i}\) and \(\hat{i} + 2\hat{j}\) has area \(6\) and the direction perpendicular to the parallelogram is in the \(z\)-direction, and we should take the positive \(\hat{k}\) direction according to the right hand rule.</p>
+    <figure>
+      <img src="/courses/1067114/files/31109440/preview" alt="A cap with two arrows drawn on it. One pointing to the bottom left labeled as a, and the other pointing to the bottom right labeled as b." width="50%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+      <figcaption>
+        <p style="text-align: center;">Figure 7: The right hand rule: imagine arrows as shown drawn on a cap on a water bottle. If we were to rotate the cap to turn \(\vec{a}\) towards \(\vec{b}\), we would uncap the water bottle, moving the cap up. Hence, the cross product \(\vec{a} \times \vec{b}\) points up.</p>
+      </figcaption>
+    </figure>
+    <p>In general, we can calculate the cross product of \(\vec{a} = \langle a_1, a_2, a_3 \rangle\) and \(\vec{b} = \langle b_1, b_2, b_3 \rangle\) by $$\vec{a} \times \vec{b} = \begin{vmatrix}<br>\hat{i} &amp; \hat{j} &amp; \hat{k} \\<br>a_1 &amp; a_2 &amp; a_3 \\<br>b_1 &amp; b_2 &amp; b_3<br>\end{vmatrix}.$$ For example, we can verify that $$3 \hat{i} \times (\hat{i} + 2\hat{j}) = \begin{vmatrix}<br>\hat{i} &amp; \hat{j} &amp; \hat{k} \\<br>3 &amp; 0 &amp; 0 \\<br>1 &amp; 2 &amp; 0<br>\end{vmatrix}<br>=<br>\hat{i} \begin{vmatrix}<br>0 &amp; 0 \\<br>2 &amp; 0<br>\end{vmatrix}<br>-<br>\hat{j} \begin{vmatrix}<br>3 &amp; 0 \\<br>1 &amp; 0<br>\end{vmatrix}<br>+<br>\hat{k} \begin{vmatrix}<br>3 &amp; 0 \\<br>1 &amp; 2<br>\end{vmatrix}<br>= 6 \hat{k}.$$</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #ffdc0033; border: .1em dashed #ffdc00; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">Remember that the way to calculate the determinant of a \(2 \times 2\) matrix is \(\begin{vmatrix} a &amp; b \\ c &amp; d \end{vmatrix} = ad - bc\), that is the product of the main diagonal minus the product of the other diagonal.</div>
+    <div style="padding-left: 40px; padding-right: 40px; background: #ffdc0033; border: .1em dashed #ffdc00; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">
+      <p>We can also use cross product to find areas of shapes associated with parallelograms. For example, the area of the triangle described by \(\vec{a}\) and \(\vec{b}\) is half the area of the parallelogram described by \(\vec{a}\) and \(\vec{b}\), so $$\text{Area of triangle described by } \vec{a} \text{ and } \vec{b} = \frac{1}{2} \lvert \vec{a} \times \vec{b} \rvert.$$</p>
+      <figure>
+        <img src="/courses/1067114/files/31109444/preview" alt="A triangle and a parallelogram sharing the same base and height, the triangle is half of the parallelogram." width="40%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+        <figcaption>
+          <p style="text-align: center;">Figure 8: The area of the triangle is half of that of the parallelogram.</p>
+        </figcaption>
+      </figure>
+    </div>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span></p>
+    <ol>
+      <li>
+        <p>One of the following points are in the the intersection of the planes described by \(x - 2 y + z = 0\) and \(2x + y - z = 5\). Find the point. Can you find another point in the intersection?</p>
+        <ul>
+          <li>\((2, 1, 0)\)</li>
+          <li>\((0, 5, 10)\)</li>
+          <li>\((1, 3, 5)\)</li>
+        </ul>
+      </li>
+      <li>Find a nonzero vector orthogonal to \(\langle 1, -2, 1 \rangle\) and \(\langle 2, 1, -1 \rangle\).</li>
+      <li>The intersection of the two planes in part 1 is a line. Find a nonzero vector parallel to the line.</li>
+      <li>Let \(\vec{a} = \langle 0, 0, 2 \rangle\), \(\vec{b} = \langle 1, -2, 1 \rangle\), and \(\vec{c} = \langle 2, 1, -1 \rangle\). Verify that $$\vec{a} \cdot (\vec{b} \times \vec{c}) = \begin{vmatrix}<br>0 &amp; 0 &amp; 2 \\<br>1 &amp; -2 &amp; 1 \\<br>2 &amp; 1 &amp; -1<br>\end{vmatrix}.$$ Show that in general $$\vec{a} \cdot (\vec{b} \times \vec{c}) = \begin{vmatrix}<br>a_1 &amp; a_2 &amp; a_3 \\<br>b_1 &amp; b_2 &amp; b_3 \\<br>c_1 &amp; c_2 &amp; c_3<br>\end{vmatrix}$$ and give a geometric interpretation for the quantity \(\vec{a} \cdot (\vec{b} \times \vec{c})\).</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>
+        <p>We can check if a point is in the intersection of the two planes by substituting the coordinates of the point into the equations of the planes and checking if both equations hold.</p>
+        <ul>
+          <li>For \((2, 1, 0)\), we have \(2 - 2 \cdot 1 + 0 = 0\) and \(2 \cdot 2 + 1 - 0 = 5\), so \((2, 1, 0)\) is in the intersection.</li>
+          <li>For \((0, 5, 10)\), we have \(0 - 2 \cdot 5 + 10 = 0\) and \(2 \cdot 0 + 5 - 10 = -5\), so \((0, 5, 10)\) is not in the intersection.</li>
+          <li>For \((1, 3, 5)\), we have \(1 - 2 \cdot 3 + 5 = 0\) and \(2 \cdot 1 + 3 - 5 = 0\), so \((1, 3, 5)\) is not in the intersection.</li>
+        </ul>
+        <p>The way I found the \((2, 1, 0)\) is by assuming that \(z = 0\) and solve the remaining system of equations $$\begin{cases}<br>x - 2 y = 0, \\<br>2x + y = 5,<br>\end{cases}$$ to get \(x = 2\) and \(y = 1\). We can find another point by assuming \(z\) is another value or assuming \(x\) or \(y\) is another value and solving the system of equations again. For example, if we assume \(x = 0\), then we can solve the system of equations $$\begin{cases}<br>- 2 y + z = 0, \\<br>y - z = 5,<br>\end{cases}$$ to get \(y = -5\) and \(z = -10\), so \((0, -5, -10)\) is another point in the intersection (actually you could also guessed this because when we tried \((0, 5, 10)\), we got \(0\) and \(-5\) for the left hand sides).</p>
+      </li>
+      <li>We can find a nonzero vector orthogonal to \(\langle 1, -2, 1 \rangle\) and \(\langle 2, 1, -1 \rangle\) by taking the cross product of the two vectors: $$\langle 1, -2, 1 \rangle \times \langle 2, 1, -1 \rangle = \begin{vmatrix}<br>\hat{i} &amp; \hat{j} &amp; \hat{k} \\<br>1 &amp; -2 &amp; 1 \\<br>2 &amp; 1 &amp; -1<br>\end{vmatrix}<br>=<br>\hat{i} \begin{vmatrix}<br>-2 &amp; 1 \\<br>1 &amp; -1<br>\end{vmatrix}<br>-<br>\hat{j} \begin{vmatrix}<br>1 &amp; 1 \\<br>2 &amp; -1<br>\end{vmatrix}<br>+<br>\hat{k} \begin{vmatrix}<br>1 &amp; -2 \\<br>2 &amp; 1<br>\end{vmatrix}<br>=<br>1 \hat{i} + 3 \hat{j} + 5 \hat{k}.$$</li>
+      <li>We can find a nonzero vector parallel to the line by finding the difference between two points on the line of intersection. In part 1, we found the points \((2, 1, 0)\) and \((0, -5, -10)\) in the intersection, so we can take the difference to get $$\langle 2, 1, 0 \rangle - \langle 0, -5, -10 \rangle = \langle 2, 6 , 10 \rangle.$$ Note that this vector is pointing in the same direction as the vector we found in part 2. This is no coincidence because vectors parallel to the planes \(x - 2y + z = 0\) and \(2x + y - z = 5\) are orthogonal to \(\langle 1, -2, 1 \rangle\) and \(\langle 2, 1, -1 \rangle\) respectively, so a vector parallel to the line of intersection should be orthogonal to both \(\langle 1, -2, 1 \rangle\) and \(\langle 2, 1, -1 \rangle\), so part 2 and part 3 are secretly the same question.</li>
+      <li>
+        <p>We have already calculated that $$\vec{b} \times \vec{c} = \langle 1, -2, 1 \rangle \times \langle 2, 1, -1 \rangle = \langle 1, 3, 5 \rangle,$$ so we can calculate the left hand side of the equation by $$\vec{a} \cdot (\vec{b} \times \vec{c}) = \langle 0, 0, 2 \rangle \cdot \langle 1, 3, 5 \rangle = 10.$$ We can calculate the right hand side of the equation by $$\begin{vmatrix}<br>0 &amp; 0 &amp; 2 \\<br>1 &amp; -2 &amp; 1 \\<br>2 &amp; 1 &amp; -1<br>\end{vmatrix}<br>=<br>0 \begin{vmatrix}<br>-2 &amp; 1 \\<br>1 &amp; -1<br>\end{vmatrix}<br>-<br>0 \begin{vmatrix}<br>1 &amp; 1 \\<br>2 &amp; -1<br>\end{vmatrix}<br>+<br>2 \begin{vmatrix}<br>1 &amp; -2 \\<br>2 &amp; 1<br>\end{vmatrix}<br>=<br>10.$$ Thus, we indeed have $$\vec{a} \cdot (\vec{b} \times \vec{c}) = \begin{vmatrix}<br>0 &amp; 0 &amp; 2 \\<br>1 &amp; -2 &amp; 1 \\<br>2 &amp; 1 &amp; -1<br>\end{vmatrix}$$ in this particular case.</p>
+        <p>We can also show that this is generally true by computing $$\begin{aligned}<br>\vec{a} \cdot (\vec{b} \times \vec{c}) &amp;= (a_1 \hat{i} + a_2 \hat{j} + a_3 \hat{k}) \cdot \left(\hat{i} \begin{vmatrix} b_2 &amp; b_3 \\ c_2 &amp; c_3 \end{vmatrix} - \hat{j} \begin{vmatrix} b_1 &amp; b_3 \\ c_1 &amp; c_3 \end{vmatrix} + \hat{k} \begin{vmatrix} b_1 &amp; b_2 \\ c_1 &amp; c_2 \end{vmatrix}\right) \\<br>&amp;=<br>a_1 \begin{vmatrix} b_2 &amp; b_3 \\ c_2 &amp; c_3 \end{vmatrix} - a_2 \begin{vmatrix} b_1 &amp; b_3 \\ c_1 &amp; c_3 \end{vmatrix} + a_3 \begin{vmatrix} b_1 &amp; b_2 \\ c_1 &amp; c_2 \end{vmatrix} \\<br>&amp;=<br>\begin{vmatrix}<br>a_1 &amp; a_2 &amp; a_3 \\<br>b_1 &amp; b_2 &amp; b_3 \\<br>c_1 &amp; c_2 &amp; c_3<br>\end{vmatrix}.<br>\end{aligned}$$ The geometric interpretation for the quantity \(\vec{a} \cdot (\vec{b} \times \vec{c})\) is that it gives the signed volume of the parallelepiped described by \(\vec{a}\), \(\vec{b}\), and \(\vec{c}\). The signed volume is negative if the direction of \(\vec{b} \times \vec{c}\) (which we can find using right hand rule) is opposite to the direction of \(\vec{a}\).</p>
+      </li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+  </body>
+</html>

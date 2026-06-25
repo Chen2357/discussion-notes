@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAT 21C Discussion 7</title>
+    <meta name="authors" content="Chen Liang">
+  </head>
+  <body>
+    <h2>§I Warm-Up</h2>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Warm-up)</span> Explain the mistakes in the following <strong>incorrect</strong> derivation of the first three terms of the Taylor series of the function \(f(x) = e^x \cos x\).</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #c7383433; border: .1em dashed #c73834; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">$$e^x = 1 + x + \frac{x^2}{2} \qquad \cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24}$$ $$\begin{array}{c|c|c|c}<br>&amp; 1 &amp; x &amp; \frac{x^2}{2} \\<br>\hline<br>1 &amp; 1 &amp; x &amp; \frac{x^2}{2} \\<br>\hline<br>-\frac{x^2}{2} &amp; -\frac{x^2}{2} &amp; -\frac{x^3}{2} &amp; -\frac{x^4}{4} \\<br>\hline<br>\frac{x^4}{24} &amp; \frac{x^4}{24} &amp; \frac{x^5}{24} &amp; \frac{x^6}{48}<br>\end{array}$$ $$\begin{align}<br>e^x \cos x &amp;= 1 + x + \frac{x^2}{2} - \frac{x^2}{2} - \frac{x^3}{2} + \frac{x^4}{24} - \frac{x^4}{4} + \frac{x^5}{24} + \frac{x^6}{48} \\<br>&amp;= 1 + x - \frac{x^3}{2}<br>\end{align}$$</div>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span> The source of the mistake is the arbitrary truncation of the Taylor series. It is important to not only write $$e^x = 1 + x + \frac{x^2}{2} + \cdots \qquad \cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} + \cdots$$ but also keep in mind the omitted terms, because in the end, we will get to $$e^x \cos x = 1 + x - \frac{x^3}{2} + \cdots$$ we have to verify that the omitted terms contain strictly higher powers of \(x\). This is not the case in the incorrect solution.</p>
+    <p>The correct solution is to write $$\begin{align}<br>e^x &amp;= 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + \cdots \\<br>\cos x &amp;= 1 - \frac{x^2}{2} + \frac{x^4}{24} + \cdots<br>\end{align}$$ and in the subsequent calculation, always ensure that the omitted terms contain fourth or or higher powers of \(x\) (so actually we can even absorb \(\frac{x^4}{24}\) into the \(\cdots\)). We can multiply to get $$\begin{array}{c|c|c|c|c|c}<br>&amp; 1 &amp; x &amp; \frac{x^2}{2} &amp; \frac{x^3}{6} &amp; \cdots \\<br>\hline<br>1 &amp; 1 &amp; x &amp; \frac{x^2}{2} &amp; \frac{x^3}{6} &amp; \cdots \\<br>\hline<br>-\frac{x^2}{2} &amp; -\frac{x^2}{2} &amp; -\frac{x^3}{2} &amp; \cdots &amp; \cdots &amp; \cdots \\<br>\hline<br>\vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \vdots &amp; \ddots<br>\end{array}$$ where the omitted terms are always fourth or higher powers of \(x\), so we can conclude that $$e^x \cos x = 1 + x - \frac{x^3}{2} + \frac{x^3}{6} + \cdots.$$</p>
+    <hr style="border: 1px solid #c73834;">
+    <h2>§II Two-Variable Limits</h2>
+    <p>The formal definition of $$\lim_{(x, y) \to (x_0, y_0)} f(x, y) = L$$ is not important to us. We need to know to compute a two-variable limit is that if \(f(x, y)\) is continuous and is well-defined at \((x_0, y_0)\), then we can simply substitute \((x_0, y_0)\) into \(f(x, y)\) to get $$\lim_{(x, y) \to (x_0, y_0)} f(x, y) = f(x_0, y_0).$$ If \(f(x, y)\) is not well-defined at \((x_0, y_0)\), then the strategy is to rewrite \(f(x, y)\) into a function that agrees with \(f(x, y)\) near \((x_0, y_0)\) and is well-defined at \((x_0, y_0)\).</p>
+    <p>For example, to compute $$\lim_{(x, y) \to (0, 0)} \frac{\sin (x^2 + y^2)}{x^2 + y^2}$$ we can use Taylor series to rewrite this as $$\begin{align}<br>\lim_{(x, y) \to (0, 0)} \frac{1}{x^2 + y^2} \left( (x^2 + y^2) - \frac{(x^2 + y^2)^3}{3!} + \cdots \right)<br>&amp;= \lim_{(x, y) \to (0, 0)} \left( 1 - \frac{(x^2 + y^2)^2}{3!} + \cdots \right) \\<br>&amp;= 1.<br>\end{align}$$</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #ffdc0033; border: .1em dashed #ffdc00; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">Power series is continuous and smooth on its interval of convergence.</div>
+    <p>Besides Taylor series, you also need to know factoring and the Sandwich Theorem, and knowing these three tricks is enough to evaluate every limit on Homework 18.</p>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span> Evaluate the limit:</p>
+    <ol>
+      <li>\(\displaystyle \lim_{(x, y) \to (0, 0)} \frac{e^y \sin x}{x}\).</li>
+      <li>\(\displaystyle \lim_{(x, y) \to (4, 3)} \frac{\sqrt{x} - \sqrt{y + 1}}{x - y - 1}\).</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>We have $$\begin{align}<br>\lim_{(x, y) \to (0, 0)} \frac{e^y \sin x}{x} &amp;= \lim_{(x, y) \to (0, 0)} e^y \cdot \frac{1}{x} \left( x - \frac{x^3}{3!} + \cdots \right) \\<br>&amp;= \lim_{(x, y) \to (0, 0)} e^y \cdot \left( 1 - \frac{x^2}{3!} + \cdots \right) \\<br>&amp;= 1.<br>\end{align}$$</li>
+      <li>We can factor the denominator as $$x - y - 1 = (\sqrt{x})^2 - (\sqrt{y + 1})^2 = (\sqrt{x} - \sqrt{y + 1})(\sqrt{x} + \sqrt{y + 1}),$$ so we can rewrite the limit as $$\lim_{(x, y) \to (4, 3)} \frac{\sqrt{x} - \sqrt{y + 1}}{(\sqrt{x} - \sqrt{y + 1})(\sqrt{x} + \sqrt{y + 1})} = \lim_{(x, y) \to (4, 3)} \frac{1}{\sqrt{x} + \sqrt{y + 1}} = \frac{1}{4}.$$</li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+    <p>To show that a two-variable limit does not exist, we need to find two different paths to \((x_0, y_0)\) along which \(f(x, y)\) approaches different limits. For this kind of problem, we often like to describe a path to \((x_0, y_0)\) as an equation \(y = g(x)\) <mark>as long as</mark> \(g(x_0) = y_0\) so that it actually goes through the point. We evaluate the limit along the path by $$\lim_{\stackrel{(x, y) \to (x_0, y_0)}{y = g(x)}} f(x, y) = \lim_{x \to x_0} f(x, y) \bigr|_{y = g(x)}.$$ If we can find two paths \(y = g_1(x)\) and \(y = g_2(x)\) such that $$\lim_{\stackrel{(x, y) \to (x_0, y_0)}{y = g_1(x)}} f(x, y) \neq \lim_{\stackrel{(x, y) \to (x_0, y_0)}{y = g_2(x)}} f(x, y),$$ then we can conclude that the two-variable limit $$\lim_{(x, y) \to (x_0, y_0)} f(x, y) \quad \text{does not exist.}$$ Also note that we can describe a path using \(x = h(y)\) also, we will similarly evaluate the limit along this path by $$\lim_{\stackrel{(x, y) \to (x_0, y_0)}{x = h(y)}} f(x, y) = \lim_{y \to y_0} f(x, y) \bigr|_{x = h(y)}$$ and if this is different from the limit along some other path (including the \(y = g(x)\) paths), then we can also conclude that the two-variable limit does not exist.</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #ffdc0033; border: .1em dashed #ffdc00; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">In practice, we like to test the straight-line paths \(y=kx\) including the vertical line \(x=0\). You will probably get hints if more complicated paths are needed.</div>
+    <p>As an example, we can show that the limit $$\lim_{(x, y) \to (0, 0)} \frac{y}{x}$$ does not exist by evaluating the limit along the paths \(y = kx\): $$\lim_{\stackrel{(x, y) \to (0, 0)} {y = kx}} \frac{y}{x} = \lim_{x \to 0} \frac{kx}{x} = k.$$ Since the limit depends on the value of \(k\), we can conclude that the two-variable limit does not exist.</p>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span> Show that the limit does not exist:</p>
+    <ol>
+      <li>\(\displaystyle \lim_{(x, y) \to (0, 0)} \frac{xy}{\lvert x y \rvert}\).</li>
+      <li>\(\displaystyle \lim_{(x, y) \to (1, -1)} \frac{x y + 1}{x^2 - y^2}\).</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>We can evaluate the limit along the paths \(y = kx\): $$\lim_{\stackrel{(x, y) \to (0, 0)}{y = kx}} \frac{xy}{\lvert xy \rvert} = \lim_{x \to 0} \frac{k x^2}{\lvert k x^2 \rvert} = \begin{cases}<br>1 &amp; \text{if } k > 0, \\<br>-1 &amp; \text{if } k &lt; 0.<br>\end{cases}$$ Since the limit depends on the value of \(k\), we can conclude that the two-variable limit does not exist.</li>
+      <li>
+        <p>We can evaluate the limit along the paths \(y = k(x - 1) - 1\), but the limit will actually be quite cumbersome to compute. Instead, we can just evaluate the limit along the paths \(y = -1\) and \(x = 1\).</p>
+        <p>Along the path \(y = -1\), we have $$\lim_{\stackrel{(x, y) \to (1, -1)}{y = -1}} \frac{x y + 1}{x^2 - y}^2 = \lim_{x \to 1} \frac{-x + 1}{x^2 - 1} = \lim_{x \to 1} \frac{-(x - 1)}{(x - 1)(x + 1)} = -\frac{1}{2}.$$ Along the path \(x = 1\), we have $$\lim_{\stackrel{(x, y) \to (1, -1)}{x = 1}} \frac{x y + 1}{x^2 - y^2} = \lim_{y \to -1} \frac{y + 1}{1 - y^2} = \lim_{y \to -1} \frac{y + 1}{(1 - y)(1 + y)} = \lim_{y \to -1} \frac{1}{1 - y} = \frac{1}{2}.$$ Since the limit along these two paths are different, we can conclude that the two-variable limit does not exist.</p>
+      </li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+    <h2>§III Midterm Review</h2>
+    <p>Here are the topics that we should be familiar with for the midterm based on the review problems:</p>
+    <ul>
+      <li>
+        <p>P1-2: Interval of convergence of a power series.</p>
+        <ul>
+          <li>Apply ratio or root test</li>
+          <li>Rewrite inequality to get the radius of convergence</li>
+          <li>Check endpoints if any</li>
+        </ul>
+      </li>
+      <li>P3: Finding the Taylor series (through derivatives or substitution into known Taylor series)</li>
+      <li>P4: Use Taylor series to evaluate limits.</li>
+      <li>P5: Estimate error</li>
+      <li>P6-8: Dot product, cross product, angle, length, and projection</li>
+      <li>P9: Area of parallelogram and volume of parallelepiped</li>
+      <li>P10: Parallel or perpendicular</li>
+      <li>P11: Parametric equations for a line (segment)</li>
+      <li>P12: Equation of a plane</li>
+      <li>P13: Intersection of planes</li>
+      <li>P14: Intersection of a plane and a line</li>
+      <li>P15-16: Velocity and acceleration of a parametric curve</li>
+    </ul>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Selected Midterm Review Problems)</span></p>
+    <ul>
+      <li>P3.B: Use any method to find the Taylor series of \(\displaystyle \sin \frac{2x}{3}\).</li>
+      <li>P5: Use a fourth-order Taylor polynomial to approximate the integral \(\displaystyle \int_0^1 \frac{\sin x}{x} \, dx\) and estimate the error in your approximation.</li>
+      <li>P8: If \(\lvert \mathbf{v} \rvert = 2\), \(\lvert \mathbf{u} \rvert = 3\), and the angle between \(\mathbf{v}\) and \(\mathbf{u}\) is \(\frac{\pi}{3}\), find \(\lvert \mathbf{v} - 2 \mathbf{u} \rvert\).</li>
+      <li>P12: Find the plane passing through the points \((1, -1, 2)\), \((2, 1, 3)\), and \((-1, 2, -1)\).</li>
+      <li>P14: Find the point at which the line passing through the origin perpendicular to the plane \(2x - y - z = 4\) meets the plane \(3x - 5y + 2z = 6\).</li>
+      <li>P15: Given \(\mathbf{r}(t) = \langle e^t \cos t, e^t \sin t \rangle\), show that the angle between \(\mathbf{r}(t)\) and \(\mathbf{a}(t)\) is constant. What is this angle?</li>
+    </ul>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ul>
+      <li>
+        <p><strong>P3.B</strong>: We know that the Taylor series of \(\sin u\) is $$\sin u = u - \frac{u^3}{3!} + \frac{u^5}{5!} - \frac{u^7}{7!} + \cdots$$ so we can substitute \(u = \frac{2x}{3}\) to get $$\begin{align}<br>\sin \frac{2x}{3} &amp;= \frac{2x}{3} - \frac{(2x/3)^3}{3!} + \frac{(2x/3)^5}{5!} - \frac{(2x/3)^7}{7!} + \cdots \\<br>&amp;= \frac{2x}{3} - \frac{2^3 x^3}{3^3 \cdot 3!} + \frac{2^5 x^5}{3^5 \cdot 5!} - \frac{2^7 x^7}{3^7 \cdot 7!} + \cdots.<br>\end{align}$$</p>
+        <div style="padding-left: 40px; padding-right: 40px; background: #ffdc0033; border: .1em dashed #ffdc00; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">I highly recommend you when using substitution to find the Taylor series to express the known Taylor series in terms of a fresh variable like \(u\), and then write an explicit substitution of \(u\) equals some expression of \(x\).</div>
+      </li>
+      <li><strong>P5</strong>: We can use the Taylor series of \(\sin x\) to get $$\frac{\sin x}{x} = 1 - \frac{x^2}{3!} + \frac{x^4}{5!} - \frac{x^6}{7!} + \cdots.$$ Approximating the integral by a fourth order Taylor polynomial, we get $$\int_0^1 \left( 1 - \frac{x^2}{3!} + \frac{x^4}{5!} \right) \, dx = 1 - \frac{1}{3! \cdot 3} + \frac{1}{5! \cdot 5}.$$ Note the Taylor series is alternating with terms decreasing for \(0 &lt; x &lt; 1\), so the error approximation is at most the absolute value of the first omitted term: $$R_4 (x) \leq \frac{x^6}{7!}.$$ We can integrate to get the error bound for the integral $$\int_0^1 \frac{x^6}{7!} \, dx = \frac{1}{7! \cdot 7}.$$</li>
+      <li><strong>P8</strong>: We have $$\begin{align}<br>\lvert \mathbf{v} - 2 \mathbf{u} \rvert^2 = (\mathbf{v} - 2 \mathbf{u}) \cdot (\mathbf{v} - 2 \mathbf{u}) &amp;= \mathbf{v} \cdot \mathbf{v} - 2 \mathbf{u} \cdot \mathbf{v} - 2 \mathbf{v} \cdot \mathbf{u} + 4 \mathbf{u} \cdot \mathbf{u} \\<br>&amp;= \lvert \mathbf{v} \rvert^2 - 4 \mathbf{u} \cdot \mathbf{v} + 4 \lvert \mathbf{u} \rvert^2 \\<br>&amp;= 2^2 - 4 \left(3 \cdot 2 \cdot \cos \frac{\pi}{3}\right) + 4 \cdot 3^2 \\<br>&amp;= 4 - 12 + 36 = 28.<br>\end{align}$$ So we have \(\lvert \mathbf{v} - 2 \mathbf{u} \rvert = \sqrt{28} = 2 \sqrt{7}\).</li>
+      <li><strong>P12</strong>: We can find the normal vector of the plane by taking the cross product of two vectors parallel to the plane, and we can find two vectors parallel to the plane by finding the difference of two of the points with the third. We have $$\begin{align}<br>\langle 2, 1, 3 \rangle - \langle 1, -1, 2 \rangle &amp;= \langle 1, 2, 1 \rangle, \\<br>\langle -1, 2, -1 \rangle - \langle 1, -1, 2 \rangle &amp;= \langle -2, 3, -3 \rangle.<br>\end{align}$$ So we can take the cross product to get the normal vector $$\begin{align}<br>\begin{vmatrix}<br>\mathbf{i} &amp; \mathbf{j} &amp; \mathbf{k} \\<br>1 &amp; 2 &amp; 1 \\<br>-2 &amp; 3 &amp; -3<br>\end{vmatrix}<br>&amp;= \mathbf{i} (-6 - 3) - \mathbf{j} (-3 + 2) + \mathbf{k} (3 + 4) \\<br>&amp;= -9 \mathbf{i} + \mathbf{j} + 7 \mathbf{k}<br>\end{align}$$ Therefore, the equation of the plane is of the form $$-9 x + y + 7 z = d$$ for some constant \(d\), and we can find \(d\) by plugging in any of the three points (and they should give the same answer, sometime would be wrong if they are not), for example, we can plug in \((1, -1, 2)\) to get $$-9 \cdot 1 + (-1) + 7 \cdot 2 = 5.$$ So the equation of the plane is $$-9 x + y + 7 z = 5.$$</li>
+      <li><strong>P14</strong>: The line passing through the origin perpendicular to the plane \(2x - y - z = 4\) is given by the parametric equations $$x = 2t, \quad y = -t, \quad z = -t.$$ We can plug these into the equation of the plane \(3x - 5y + 2z = 6\) to get $$3(2t) - 5(-t) + 2(-t) = 9 t = 6 \implies t = \frac{2}{3}.$$ Therefore, the point at which the line meets the plane is (by plugging into the parametric equations) $$(x, y, z) = \left( \frac{4}{3}, -\frac{2}{3}, -\frac{2}{3} \right).$$</li>
+      <li><strong>P15</strong>: We can compute the velocity and acceleration by taking derivatives: $$\begin{align}<br>\mathbf{v}(t) &amp;= \mathbf{r}'(t) = \langle e^t \cos t - e^t \sin t, e^t \sin t + e^t \cos t \rangle, \\<br>\mathbf{a}(t) &amp;= \mathbf{v}'(t) = \langle -2 e^t \sin t, 2 e^t \cos t \rangle.<br>\end{align}$$ So we have $$\mathbf{r}(t) \cdot \mathbf{a}(t) = 2 e^{2t} (\cos t (-\sin t) + \sin t \cos t) = 0,$$ Therefore, \(\mathbf{r}(t)\) and \(\mathbf{a}(t)\) are perpendicular for all \(t\), so the angle between them is constant and is equal to \(\frac{\pi}{2}\).</li>
+    </ul>
+    <hr style="border: 1px solid #c73834;">
+  </body>
+</html>

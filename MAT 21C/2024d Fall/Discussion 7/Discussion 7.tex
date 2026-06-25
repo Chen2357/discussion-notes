@@ -1,0 +1,55 @@
+\documentclass{discussion}
+
+\usepackage{amsmath, amsthm, amssymb}
+% \usepackage{xcolor, hyperref, cleveref}
+\usepackage{mathtools}
+\usepackage{derivative}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{tasks}
+\usepackage{mdframed}
+\usepackage{interval}
+\usepackage{commands}
+
+\settasks{
+    label-width = 13.9917pt,
+    item-indent = 17.64131pt,
+    after-item-skip = 90pt,
+    column-sep = 20pt,
+    label = (\arabic*)
+}
+
+\discussion{7}
+\author{Sections B04 and B06}
+\date{Fall 2024}
+
+\begin{document}
+
+\begin{question}
+    Find the vector form or the parametric form for each of the following lines in \(\real^3\).
+    \begin{tasks}(2)
+        \task The line passing through \((1, 1, 1)\) and parallel to the vector \((1, 2, 3)\).
+        \task The line passing through the points \((1, 2, 3)\) and \((4, 5, 6)\).
+        \task The intersection of the planes \(x + y + z = 1\) and \(x - y + z = 1\).
+        \task The line passing through \((1, 0, 0)\) and intersecting orthogonally with the line passing through \((0, 1, 0)\) and \((0, 0, 1)\).
+        \task The line which is tangent to the curve \(\vec{r}(t) = \left( \cos 2t, \sin 2t, t \right)\) at \(t = \frac{\pi}{4}\).
+        \task The line which is tangent to the curve \(\vec{r}(t) = \left( t, t^2, t^3 \right)\) at the point \((1, 1, 1)\).
+    \end{tasks}
+\end{question}
+
+\vspace{80pt}
+
+\begin{question}
+    Match each pair of planes in \(\real^3\) with the appropriate relationship between them.
+
+    \begin{center}
+        \setlength{\tabcolsep}{2em}
+        \begin{tabularx}{\textwidth}{lX}
+            \(x + 2y - z = 1\) and \(-2 x - 4 y + 2z = -2\) & \linespread{1.4}\selectfont The planes are parallel with a positive distance of \rule{1.5cm}{0.15mm} \vspace{40pt} \\
+            \(x + 2y + 3z = 1\) and \(x + 2y + 3z = -2\) & \linespread{1.4}\selectfont The planes are intersecting with an angle whose cosine is \rule{1.5cm}{0.15mm} \vspace{40pt} \\
+            \(x + 2y + 3z = 1\) and \(3x + 2y + 1 z = 1\) & The planes coincide
+        \end{tabularx}
+    \end{center}
+\end{question}
+
+\end{document}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MAT 21C Discussion 4</title>
+    <meta name="authors" content="Chen Liang">
+  </head>
+  <body>
+    <h2>§I Warm-Up</h2>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Discuss)</span> Consider a power series $$c_0 + c_1 x + c_2 x^2 + c_3 x^3 + c_4 x^4 + \cdots.$$ Discuss what the phrase “the power series converges at \(x = a\)” means if \(a\) is a constant. If the series converges absolutely at \(x = a\), then what can we say about the convergence of the series at \(x = -a\)? Does your argument work for negative \(a\) as well?</p>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span> The power series converges at \(x = a\) if the series $$c_0 + c_1 a + c_2 a^2 + c_3 a^3 + c_4 a^4 + \cdots$$ converges. Note that \(c_n\) and \(a\) are just constants, so the series is just an infinite sum of numbers. If the series converges absolutely at \(x = a\), then that means the series $$\lvert c_0 \rvert + \lvert c_1 a \rvert + \lvert c_2 a^2 \rvert + \lvert c_3 a^3 \rvert + \lvert c_4 a^4 \rvert + \cdots = S$$ converges to some finite number \(S\). Whether or not the series converges at \(x = -a\) depends on whether the series $$c_0 + c_1 (-a) + c_2 (-a)^2 + c_3 (-a)^3 + c_4 (-a)^4 + \cdots,$$ but then we know $$\lvert c_0 \rvert + \lvert c_1 (-a) \rvert + \lvert c_2 (-a)^2 \rvert + \lvert c_3 (-a)^3 \rvert + \lvert c_4 (-a)^4 \rvert + \cdots = S,$$ so the series converges absolutely at \(x = -a\) by the absolute convergence test.</p>
+    <hr style="border: 1px solid #c73834;">
+    <h2>§II Power Series</h2>
+    <p>Recall the very first discussion where I showed you the Taylor series for \(\cos x\) which is $$\cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} - \frac{x^6}{720} + \cdots = \sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{(2n)!}.$$ This is one of the tools to calculate \(\cos x\) and get the computer to show you a number with finite precision on screen. The computer can not calculate the theoretical value of say \(\cos 0.01\) because it would involve infinitely many calculations and the ability to show infinitely many digits.</p>
+    <p>There are two questions that need to be answered to be confident about this method.</p>
+    <ul>
+      <li>What is the interval of convergence of the power series?</li>
+      <li>Does the power series converge to our target function on the interval of convergence?</li>
+    </ul>
+    <p>Only if we have the answers to these two questions, we can be sure that the power series is a valid method to calculate the function.</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #aaaaaa1a; border: .1em dashed #0f65a0; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">
+      <p>There are only six possibilities for the interval of convergence of a power series $$c_0 + c_1 (x - a) + c_2 (x - a)^2 + c_3 (x - a)^3 + c_4 (x - a)^4 + \cdots$$ determined by the radius of convergence \(R\) and the convergence behaviors at the endpoints \(a - R\) and \(a + R\).</p>
+      <figure>
+        <img src="/courses/1067114/files/30976950/preview" alt width="50%" style="background-color: white; display: block; margin-left: auto; margin-right: auto;">
+        <figcaption>
+          <p style="text-align: center;">Figure 1: Six possibilities for the interval of convergence of a power series.</p>
+        </figcaption>
+      </figure>
+      <p>Moreover, the series always converges absolutely on the interior of the interval of convergence. As suggested by the warm-up, absolute convergence is symmetric about the center.</p>
+      <p>Finding the interval of convergence consists of three steps:</p>
+      <ol>
+        <li value="1">Apply the ratio or root test (or other methods that shows <em>absolute convergence</em>), so we are looking at the absolute convergence condition $$\lim_{n \to \infty} \left\lvert \frac{(n+1)\text{th term}}{n\text{th term}} \right\rvert &lt; 1 \quad \text{or} \quad \lim_{n \to \infty} \sqrt[n]{\lvert n\text{th term} \rvert} &lt; 1.$$</li>
+        <li value="2">
+          <p>There are three different possibilities at this point.</p>
+          <ul>
+            <li>The absolute convergence condition can be true for all \(x\), then \(R = \infty\) and the interval of convergence is \((-\infty, \infty)\).</li>
+            <li>The absolute convergence condition can be only true for \(x = a\), then \(R = 0\) and the interval of convergence is \(\{a\}\).</li>
+            <li>The absolute convergence condition can be rewritten as $$\lvert x - a \rvert &lt; R$$ and \(R\) would be the radius of convergence. Further analysis is needed to determine the convergence behaviors at the endpoints \(a - R\) and \(a + R\).</li>
+          </ul>
+        </li>
+        <li value="3">Check for the convergence at the endpoints by plugging in \(x = a - R\) and \(x = a + R\), which is to say, we need to decide whether the series $$\begin{aligned}<br>\text{at } x = a - R &amp;: c_0 + c_1 (-R) + c_2 (-R)^2 + c_3 (-R)^3 + c_4 (-R)^4 + \cdots \\<br>\text{at } x = a + R &amp;: c_0 + c_1 R + c_2 R^2 + c_3 R^3 + c_4 R^4 - \cdots<br>\end{aligned}$$ converges or diverges. We will conclude one of the four possibilities for the interval of convergence: \((a - R, a + R)\), \([a - R, a + R)\), \((a - R, a + R]\), or \([a - R, a + R]\).</li>
+      </ol>
+    </div>
+    <p>As an example, let us find the interval of convergence of the power series $$1 - x^2 + x^4 - x^6 + x^8 - x^{10} + \cdots = \sum_{n=0}^\infty (-1)^n x^{2n}.$$ One way is to notice that this is a geometric series with common ratio \(-x^2\) so it converges absolutely if and only if \(\lvert -x^2 \rvert &lt; 1\) which can be rewritten as \(\lvert x \rvert &lt; 1\). Applying the ratio test gives the same condition: $$\lim_{n \to \infty} \left\lvert \frac{(-1)^{n+1} x^{2(n+1)}}{(-1)^n x^{2n}} \right\rvert = \lim_{n \to \infty} \lvert x^2 \rvert = \lvert x \rvert^2 &lt; 1 \iff \lvert x \rvert &lt; 1.$$ Therefore, the radius of convergence is \(R = 1\). Now, we need to check for convergence at the endpoints \(x = -1\) and \(x = 1\). At \(x = -1\), the series becomes $$1 - 1 + 1 - 1 + 1 - 1 + \cdots$$ which diverges, and at \(x = 1\), the series also becomes $$1 - 1 + 1 - 1 + 1 - 1 + \cdots$$ which diverges. Therefore, the interval of convergence is \((-1, 1)\).</p>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span> Find the interval of convergence of the following power series.</p>
+    <ol>
+      <li>\(\displaystyle 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots\)</li>
+      <li>\(\displaystyle x - \frac{x^3}{3} + \frac{x^5}{5} - \frac{x^7}{7} + \frac{x^9}{9} - \cdots\)</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>The series can be rewritten as $$\sum_{n=0}^\infty \frac{x^n}{n!}.$$ By the ratio test, the series converges absolutely if $$\lim_{n\to\infty} \left\lvert \frac{x^{n+1}}{(n+1)!} \frac{n!}{x^n} \right\rvert = \lim_{n\to\infty} \left\lvert \frac{x}{n+1} \right\rvert = 0 &lt; 1,$$ which is true for all \(x\). Therefore, the interval of convergence is \((-\infty, \infty)\).</li>
+      <li>The series can be rewritten as $$\sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{2n+1}.$$ By the ratio test, the series converges absolutely if $$\lim_{n\to\infty} \left\lvert \frac{(-1)^{n+1} x^{2(n+1)+1}}{2(n+1)+1} \cdot \frac{2n+1}{(-1)^n x^{2n+1}} \right\rvert = \lim_{n\to\infty} \left\lvert \frac{2n+1}{2n + 3} x^2 \right\rvert = \lim_{n\to\infty} \left\lvert \frac{2+1/n}{2 + 3/n} x^2 \right\rvert = x^2 &lt; 1.$$ This can be rewritten as \(\lvert x \rvert &lt; 1\), so the radius of convergence is \(R = 1\). We need to check for convergence at the endpoints \(x = -1\) and \(x = 1\). At \(x = -1\), the series becomes $$-1 + \frac{1}{3} - \frac{1}{5} + \frac{1}{7} - \frac{1}{9} + \cdots,$$ which converges by the alternating series test because \(\left( 1, \frac{1}{3}, \frac{1}{5}, \frac{1}{7}, \cdots \right)\) is a positive decreasing sequence that converges to \(0\). Therefore, the interval of convergence includes \(-1\). At \(x = 1\), the series becomes $$1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \frac{1}{9} - \cdots,$$ which also converges by the alternating series test. Therefore, the interval of convergence is \([ - 1, 1 ]\).</li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+    <p>While we know that the series $$1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \frac{1}{9} - \cdots$$ converges, we do not know what it converges to. Taylor series is a tool that can help us answer this question. In Professor’s discussion worksheet, you will be guided to find that $$\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} - \frac{x^7}{7} + \frac{x^9}{9} - \cdots$$ for \(-1 \leq x \leq 1\) and thus we get the amazing formula $$\frac{\pi}{4} = \arctan 1 = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \frac{1}{9} - \cdots$$ by plugging in \(x = 1\).</p>
+    <h2>§III Taylor Series</h2>
+    <p>We begin with the question whether we can rewrite a target function \(f(x)\) as a power series $$c_0 + c_1 x + c_2 x^2 + c_3 x^3 + c_4 x^4 + \cdots.$$ We can obtain a “best guess” by matching all orders of derivatives at \(x = 0\), and this best guess is called the Taylor series of \(f(x)\) generated at \(x = 0\). It is given by $$p(x) = f(0) + f'(0) x + \frac{f''(0)}{2 \cdot 1} x^2 + \frac{f^{(3)}(0)}{3 \cdot 2 \cdot 1} x^3 + \frac{f^{(4)}(0)}{4 \cdot 3 \cdot 2 \cdot 1} x^4 + \cdots = \sum_{n=0}^\infty \frac{f^{(n)}(0)}{n!} x^n.$$ We can convince ourselves that this power series matches all orders of derivatives at \(x = 0\) by checking that $$\begin{aligned}<br>p(x) &amp;= f(0) + f'(0) x + \frac{f''(0)}{2 \cdot 1} x^2 + \frac{f^{(3)}(0)}{3 \cdot 2 \cdot 1} x^3 + \frac{f^{(4)}(0)}{4 \cdot 3 \cdot 2 \cdot 1} x^4 + \cdots &amp;&amp;\implies p(0) = f(0)\\<br>p'(x) &amp;= f'(0) + \frac{f''(0)}{1} x + \frac{f^{(3)}(0)}{2 \cdot 1} x^2 + \frac{f^{(4)}(0)}{3 \cdot 2 \cdot 1} x^3 + \cdots &amp;&amp;\implies p'(0) = f'(0)\\<br>p''(x) &amp;= f''(0) + \frac{f^{(3)}(0)}{1} x + \frac{f^{(4)}(0)}{2 \cdot 1} x^2 + \cdots &amp;&amp;\implies p''(0) = f''(0)\\<br>\, &amp; \; \vdots &amp;&amp; \;\; \vdots<br>\end{aligned}$$ We can generalize this definition to Taylor series generated by any point \(x = a\) instead of \(x = 0\), and the formula is $$f(a) + f'(a) (x - a) + \frac{f''(a)}{2!} (x - a)^2 + \frac{f^{(3)}(a)}{3!} (x - a)^3 + \cdots = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!} (x - a)^n.$$</p>
+    <p>The Taylor series is only a best guess. It is only sometimes true that the Taylor series converges to the target function. We need to verify it using the Taylor’s formula.</p>
+    <div style="padding-left: 40px; padding-right: 40px; background: #aaaaaa1a; border: .1em dashed #0f65a0; border-radius: 1.5em; padding: .25em 2em; box-sizing: border-box; margin: .5em 0em;">
+      <p><span style="color: #0f65a0;">(Taylor’s formula)</span> The remainder term $$R_n(x) = f(x) - \left( f(0) + f'(0) x + \frac{f''(0)}{2!} x^2 + \cdots + \frac{f^{(n)}(0)}{n!} x^n \right)$$ after approximating \(f(x)\) by the Taylor polynomial of degree \(n\) is bounded by $$\lvert R_n(x) \rvert \leq \frac{M}{(n+1)!} \lvert x \rvert^{n+1}$$ if \(M\) is greater than or equal to \(\lvert f^{(n+1)}(c) \rvert\) for all \(c\) between \(0\) and \(x\). For example, if \(\lvert f^{(n+1)}(c) \rvert\) is increasing, then we can take \(M = \lvert f^{(n+1)}(x) \rvert\).</p>
+      <p>If we can show that $$\lim_{n \to \infty} \lvert R_n(x) \rvert \leq \lim_{n \to \infty} \frac{M}{(n+1)!} \lvert x \rvert^{n+1} = 0,$$ then we can conclude that the Taylor series converges to \(f(x)\) at \(x\). Be careful that \(M\) is not always a constant, it can depend on \(n\) or even \(x\), so the limit \(\lim_{n \to \infty} \frac{M}{(n+1)!} \lvert x \rvert^{n+1}\) might not be zero.</p>
+    </div>
+    <p>As an example, the taylor series of \(f(x) = e^x\) is (using the fact that \(f^{(n)}(x) = e^x\) and thus \(f^{(n)}(0) = 1\)) $$1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \cdots.$$ We know that the series converges for all \(x\) from the previous exercise, but does it converge to \(e^x\)? This is what is going to be answered by the Taylor’s formula.</p>
+    <p>I will show that $$1 + 7 + \frac{7^2}{2!} + \frac{7^3}{3!} + \frac{7^4}{4!} + \cdots = e^7,$$ which is to say that the taylor series converges to \(e^7\) at \(x = 7\). (Note that no convergence test can tell us what the series \(1 + 7 + \frac{7^2}{2!} + \frac{7^3}{3!} + \) converges to!) The remainder at \(x = 7\) is $$R_n (7) = e^7 - \left( 1 + 7 + \frac{7^2}{2!} + \frac{7^3}{3!} + \cdots + \frac{7^n}{n!} \right)$$ which is bounded by $$\lvert R_n(7) \rvert \leq \frac{M}{(n+1)!} 7^{n+1}$$ if we can find \(M\) such that \(M \geq \lvert f^{(n+1)}(c) \rvert\) for all \(c\) between \(0\) and \(7\). Since \(f^{(n+1)}(c) = e^c\) is increasing, we can take \(M = e^7\). Therefore, we have $$\lvert R_n(7) \rvert \leq \frac{e^7}{(n+1)!} 7^{n+1}.$$ By item 6 in Theorem 5 in Section 10.1 of the textbook (the proper statement of what it means for \(x^n\) to grow slower than \(n!\)), we have $$\lim_{n \to \infty} \lvert R_n(7) \rvert \leq \lim_{n \to \infty} \frac{e^7}{(n+1)!} 7^{n+1} = 0,$$ and we conclude that the Taylor series converges to \(e^7\) at \(x = 7\).</p>
+    <hr style="border: 1px solid #685178;">
+    <p><span style="color: #685178;">(Exercise)</span></p>
+    <ol>
+      <li>Show that the Taylor series of \(e^x\) converges to \(e^9\) at \(x = 9\). (Skip if you feel this is too easy)</li>
+      <li>Show that the Taylor series of \(e^x\) converges to \(e^x\) for all \(x > 0\).</li>
+      <li>Show that the Taylor series of \(e^x\) converges to \(e^x\) for all \(x &lt; 0\).</li>
+      <li>Find the Taylor series of \(\cos x\) and show that it converges to \(\cos x\) for all \(x\).</li>
+    </ol>
+    <hr style="border: 1px solid #685178;">
+    <hr style="border: 1px solid #c73834;">
+    <p><span style="color: #9f2d2a;"><em>Solution.</em></span></p>
+    <ol>
+      <li>
+        <p>(The solution is simply replacing \(7\) with \(9\) in the previous example)</p>
+        <p>The remainder at \(x = 9\) is $$R_n (9) = e^9 - \left( 1 + 9 + \frac{9^2}{2!} + \frac{9^3}{3!} + \cdots + \frac{9^n}{n!} \right)$$ which is bounded by $$\lvert R_n(9) \rvert \leq \frac{M}{(n+1)!} 9^{n+1}$$ if we can find \(M\) such that \(M \geq \lvert f^{(n+1)}(c) \rvert\) for all \(c\) between \(0\) and \(9\). Since \(f^{(n+1)}(c) = e^c\) is increasing, we can take \(M = e^9\). Therefore, we have $$\lvert R_n(9) \rvert \leq \frac{e^9}{(n+1)!} 9^{n+1}.$$ By Theorem 5 in Section 10.1 of the textbook, we have $$\lim_{n \to \infty} \lvert R_n(9) \rvert \leq \lim_{n \to \infty} \frac{e^9}{(n+1)!} 9^{n+1} = 0,$$ and we can conclude that the Taylor series converges to \(e^9\) at \(x = 9\).</p>
+      </li>
+      <li>
+        <p>The above argument can be used to prove that the Taylor series of \(e^x\) converges to \(e^5\) at \(x = 5\), to \(e^6\) at \(x = 6\), to \(e^{100}\) at \(x = 100\), and in fact to \(e^x\) at any positive \(x\). We simply need to replace \(9\) with the positive \(x\) in the above argument.</p>
+        <p>The remainder is $$R_n (x) = e^x - \left( 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!} \right)$$ which is bounded by $$\lvert R_n(x) \rvert \leq \frac{M}{(n+1)!} \lvert x \rvert^{n+1}$$ if we can find \(M\) such that \(M \geq \lvert f^{(n+1)}(c) \rvert\) for all \(c\) between \(0\) and \(x\). Since \(f^{(n+1)}(c) = e^c\) is increasing, we can take \(M = e^x\). Therefore, we have $$\lvert R_n(x) \rvert \leq \frac{e^x}{(n+1)!} \lvert x \rvert^{n+1}.$$ By Theorem 5 in Section 10.1 of the textbook, we have $$\lim_{n \to \infty} \lvert R_n(x) \rvert \leq \lim_{n \to \infty} \frac{e^x}{(n+1)!} \lvert x \rvert^{n+1} = 0,$$ and we can conclude that the Taylor series converges to \(e^x\) at \(x\) for all \(x > 0\).</p>
+      </li>
+      <li>
+        <p>There is a caveat in the above argument when \(x &lt; 0\) because \(e^x\) is no longer the maximum of \(\lvert f^{(n+1)}(c) \rvert\) for all \(c\) between \(0\) and \(x\) (or perhaps I should say between \(x\) and \(0\) since \(x\) is negative). Instead, the maximum is \(e^0 = 1\), so we can take \(M = 1\), and then the same argument will succeed.</p>
+        <p>The remainder $$R_n (x) = e^x - \left( 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots + \frac{x^n}{n!} \right)$$ is bounded by $$\lvert R_n(x) \rvert \leq \frac{1}{(n+1)!} \lvert x \rvert^{n+1}$$ because \(M = 1\) is greater than or equal to \(\lvert f^{(n+1)}(c) \rvert\) for all \(c\) between \(x\) and \(0\). By the ratio test, we have $$\lim_{n \to \infty} \left\lvert \frac{\lvert x \rvert^{n+2}}{(n+2)!} \cdot \frac{(n+1)!}{\lvert x \rvert^{n+1}} \right\rvert = \lim_{n \to \infty} \frac{\lvert x \rvert}{n+2} = 0 &lt; 1,$$ so then $$\lim_{n \to \infty} \lvert R_n(x) \rvert \leq \lim_{n \to \infty} \frac{1}{(n+1)!} \lvert x \rvert^{n+1} = 0,$$ and we conclude that the Taylor series converges to \(e^x\) at \(x\) for all \(x &lt; 0\).</p>
+      </li>
+      <li>
+        <p>Let \(f(x) = \cos x\), then we have $$\begin{aligned}<br>f(x) &amp;= \cos x, \quad f'(x) &amp;= -\sin x, \quad f''(x) &amp;= -\cos x, \quad f^{(3)}(x) &amp;= \sin x, &amp;&amp;\, \\<br>f^{(4)}(x) &amp;= \cos x, \quad f^{(5)}(x) &amp;= -\sin x, \quad f^{(6)}(x) &amp;= -\cos x, \quad f^{(7)}(x) &amp;= \sin x, &amp;&amp;\,\\<br>f^{(8)}(x) &amp;= \cos x, \quad f^{(9)}(x) &amp;= -\sin x, \quad f^{(10)}(x) &amp;= -\cos x, \quad f^{(11)}(x) &amp;= \sin x, &amp;&amp;\cdots<br>\end{aligned}$$ and thus $$\begin{aligned}<br>f(0) &amp;= 1, \quad f'(0) &amp;= 0, \quad f''(0) &amp;= -1, \quad f^{(3)}(0) &amp;= 0, &amp;&amp;\, \\<br>f^{(4)}(0) &amp;= 1, \quad f^{(5)}(0) &amp;= 0, \quad f^{(6)}(0) &amp;= -1, \quad f^{(7)}(0) &amp;= 0, &amp;&amp;\,\\<br>f^{(8)}(0) &amp;= 1, \quad f^{(9)}(0) &amp;= 0, \quad f^{(10)}(0) &amp;= -1, \quad f^{(11)}(0) &amp;= 0, &amp;&amp;\cdots.<br>\end{aligned}$$ Therefore, the Taylor series of \(\cos x\) is $$1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \frac{x^8}{8!} - \cdots = \sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{(2n)!}.$$</p>
+        <p>The \(n\)-th remainder at \(x\) is bounded by $$\lvert R_n(x) \rvert \leq \frac{1}{(n+1)!} \lvert x \rvert^{n+1}$$ because \(M = 1\) is greater than or equal to \(\lvert f^{(n+1)}(c) \rvert\) for all \(c\) between \(0\) and \(x\) (note that \(\lvert f^{(n+1)}(c) \rvert\) is either \(\lvert \cos c \rvert\) or \(\lvert \sin c \rvert\), both of which are always less than or equal to \(1\)). Therefore, we have $$\lim_{n \to \infty} \lvert R_n(x) \rvert \leq \lim_{n \to \infty} \frac{1}{(n+1)!} \lvert x \rvert^{n+1} = 0,$$ and we can conclude that the Taylor series converges to \(\cos x\) for all \(x\).</p>
+      </li>
+    </ol>
+    <hr style="border: 1px solid #c73834;">
+  </body>
+</html>
