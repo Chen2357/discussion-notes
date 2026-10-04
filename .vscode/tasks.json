@@ -1,0 +1,24 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Fix MathML displaystyle for Canvas (current HTML file)",
+            "detail": "Wraps the content of <math> elements in <mstyle scriptlevel=\"0\" displaystyle=\"true\"> when a descendant has displaystyle=\"true\", and removes the redundant attributes. Run with the HTML file active in the editor (save it first).",
+            "type": "shell",
+            "command": "python3",
+            "args": [
+                "${workspaceFolder}/canvas_math_displaystyle_patch.py",
+                "${file}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        }
+    ]
+}
