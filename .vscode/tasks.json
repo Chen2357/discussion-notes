@@ -7,7 +7,7 @@
             "type": "shell",
             "command": "python3",
             "args": [
-                "${workspaceFolder}/canvas_math_displaystyle_patch.py",
+                "${workspaceFolder}/Tools/canvas_math_displaystyle_patch.py",
                 "${file}"
             ],
             "options": {
