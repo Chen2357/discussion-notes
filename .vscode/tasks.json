@@ -19,6 +19,24 @@
                 "panel": "shared",
                 "clear": true
             }
+        },
+        {
+            "label": "Convert MiTeX to Typst math (current .typ file)",
+            "detail": "Replaces #mi(...) / #mitex(...) MiTeX calls in the active .typ file with native Typst math (converted with the tylax crate) and writes the result to <name>.converted.typ next to the input. Save the file first. After running, compile with Typst: tylax can emit broken syntax for some constructs, which needs manual repair.",
+            "type": "shell",
+            "command": "${workspaceFolder}/Tools/mitex2typst/target/release/mitex2typst",
+            "args": [
+                "${file}"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
         }
     ]
 }

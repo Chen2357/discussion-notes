@@ -1,0 +1,11 @@
+[package]
+name = "mitex2typst"
+version = "0.1.0"
+edition = "2021"
+description = "Replace MiTeX #mi/#mitex calls in a Typst file with native Typst math, using tylax for the LaTeX -> Typst conversion"
+
+[dependencies]
+tylax = "0.3.8"
+
+[profile.release]
+strip = true
