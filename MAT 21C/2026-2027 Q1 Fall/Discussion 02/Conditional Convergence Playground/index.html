@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conditional Convergence Playground</title>
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --fg: #f0f0f0;
+    --muted: #888;
+    --accent: #ffd700;
+    --accent-dim: #bfa830;
+    --box-bg: #1a1a1a;
+    --box-border: #444;
+    --used-bg: #2a2a2a;
+    --used-border: #555;
+    --used-fg: #666;
+    --positive: #4ecdc4;
+    --negative: #ff6b6b;
+    --reveal-bg: #2a2200;
+    --reveal-border: #bfa830;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Georgia", "Times New Roman", serif;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  h1 {
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .series-display {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    color: var(--fg);
+  }
+  .series-display .sym { margin: 0 0.15em; }
+  .target-row {
+    text-align: center;
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+    color: var(--fg);
+  }
+  .target-number {
+    display: inline-block;
+    border: 2px solid var(--accent);
+    border-radius: 4px;
+    color: var(--accent);
+    font-family: "Courier New", monospace;
+    font-weight: bold;
+    margin: 0 0.3em;
+    width: 6em;
+    text-align: center;
+    background: transparent;
+    font-size: inherit;
+    padding: 0.15em 0.5em;
+  }
+  .target-number:focus {
+    outline: none;
+    border-color: var(--fg);
+  }
+  .target-number::placeholder {
+    color: var(--accent-dim);
+    opacity: 0.5;
+  }
+  .dice-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 0 0.3em;
+    vertical-align: middle;
+    transition: transform 0.2s;
+    color: var(--accent);
+  }
+  .dice-btn:hover { transform: scale(1.2); }
+
+  .instruction {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 0.8rem;
+    font-style: italic;
+  }
+
+  .term-bank-wrap {
+    background: var(--box-bg);
+    border: 1.5px solid var(--box-border);
+    border-radius: 8px;
+    padding: 1rem 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .term-bank {
+    display: grid;
+    grid-template-columns: auto repeat(7, 1fr) auto;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    gap: 0.6rem;
+    column-gap: 0.6rem;
+  }
+  .term-bank .nav-arrow {
+    grid-row: 1 / 3;
+  }
+  .term-bank .nav-arrow:first-child {
+    grid-column: 1;
+  }
+  .term-bank .nav-arrow:last-child {
+    grid-column: 9;
+  }
+  .nav-arrow {
+    background: none;
+    border: 1.5px solid var(--box-border);
+    color: var(--fg);
+    font-size: 1.2rem;
+    width: 2rem; height: 2rem;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .nav-arrow:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .nav-arrow:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  .term-btn {
+    font-family: "Georgia", serif;
+    font-size: 1rem;
+    padding: 0.35em 0.6em;
+    border: 1.5px solid var(--box-border);
+    border-radius: 4px;
+    background: var(--box-bg);
+    color: var(--fg);
+    cursor: pointer;
+    min-width: 3em;
+    width: 100%;
+    text-align: center;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    user-select: none;
+  }
+  .term-btn:hover:not(.used):not(.in-sum) {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .term-btn.used {
+    background: var(--used-bg);
+    border-color: var(--used-border);
+    color: var(--used-fg);
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+  .term-btn.in-sum {
+    border-color: var(--accent-dim);
+    color: var(--accent);
+    cursor: pointer;
+    box-shadow: 0 0 6px rgba(191,168,48,0.15);
+  }
+  .term-btn.in-sum:hover {
+    border-color: var(--accent);
+    background: rgba(255,215,0,0.08);
+  }
+  .term-btn.positive { color: var(--positive); }
+  .term-btn.negative { color: var(--negative); }
+  .term-btn.used.positive { color: #3a6b66; }
+  .term-btn.used.negative { color: #6b3a3a; }
+
+  .partial-sum-section {
+    margin-bottom: 2rem;
+  }
+  .partial-sum-label {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  .partial-sum-eq {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+  .partial-sum-eq .selected-box {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--accent-dim);
+    border-radius: 4px;
+    padding: 0.15em 0.5em;
+    min-width: 2.5em;
+    cursor: pointer;
+    transition: background 0.15s;
+    color: var(--accent);
+  }
+  .partial-sum-eq .selected-box:hover {
+    background: rgba(255,215,0,0.1);
+    border-color: var(--accent);
+  }
+  .partial-sum-eq .op { color: var(--muted); }
+  .partial-sum-eq .eq { color: var(--muted); margin: 0 0.2em; }
+  .partial-sum-eq .value {
+    font-family: "Courier New", monospace;
+    color: var(--accent);
+  }
+  .partial-sum-eq .empty {
+    color: var(--used-fg);
+    font-style: italic;
+  }
+
+  .reveal-box {
+    background: var(--reveal-bg);
+    border: 2px solid var(--reveal-border);
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+    margin-top: 2rem;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.6s ease, max-height 0.8s ease, margin-top 0.4s ease, padding 0.4s ease;
+  }
+  .reveal-box.visible {
+    opacity: 1;
+    max-height: 2000px;
+    margin-top: 2rem;
+    padding: 1.2rem 1.5rem;
+  }
+  .reveal-box h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: var(--accent);
+    font-weight: normal;
+  }
+  .reveal-box p {
+    line-height: 1.7;
+    margin: 0.8rem 0;
+  }
+  .reveal-box .math-block {
+    text-align: center;
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    color: var(--accent);
+  }
+
+  .status-indicator {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 0.8rem;
+    min-height: 1.4em;
+  }
+  .status-under { color: var(--positive); }
+  .status-over { color: var(--negative); }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Conditional Convergence Playground</h1>
+
+  <div class="series-display">
+    1 − <span class="sym">½</span> + <span class="sym">⅓</span> − <span class="sym">¼</span> + <span class="sym">⅕</span> − <span class="sym">⅙</span> + ⋯ = ?
+  </div>
+
+  <div class="target-row">
+    Rearrange the series to see if you can get it to approach
+    <input class="target-number" id="targetInput" type="text" value="0.0000" spellcheck="false" title="Type a target number">
+    <button class="dice-btn" id="rollBtn" title="Roll a new target">🎲</button>
+  </div>
+
+  <div class="instruction">Click a number to select the next term in the series.</div>
+
+  <div class="term-bank-wrap">
+    <div class="term-bank" id="termBank">
+      <button class="nav-arrow" id="prevBtn">◀</button>
+      <button class="nav-arrow" id="nextBtn">▶</button>
+    </div>
+  </div>
+
+  <div class="partial-sum-section">
+    <div class="partial-sum-label">Partial sum =</div>
+    <div class="partial-sum-eq" id="partialSumDisplay">
+      <span class="empty">(no terms selected yet)</span>
+    </div>
+    <div class="status-indicator" id="statusIndicator"></div>
+  </div>
+
+  <div class="reveal-box" id="revealBox">
+    <h2>🏆 Looks like you see the pattern!</h2>
+    <p>
+      By adding <strong>positive</strong> terms when you are <em>under</em> the target
+      and adding <strong>negative</strong> terms when you are <em>over</em> the target,
+      you are showing how we can rearrange the series to make it converge to <em>any</em> number!
+    </p>
+    <p>
+      This magic is enabled by the fact that we have an <em>infinite supply</em> of positive terms
+    </p>
+    <div class="math-block">
+      1 + ⅓ + ⅕ + ⅐ + ⋯ = ∞
+    </div>
+    <p>
+      and also an <em>infinite supply</em> of negative terms
+    </p>
+    <div class="math-block">
+      −½ − ¼ − ⅙ − ⅛ − ⋯ = −∞
+    </div>
+    <p>
+      Since both the positive and negative parts diverge on their own, we have enough
+      “oomph” in each direction to steer the partial sums toward any destination we choose.
+    </p>
+  </div>
+</div>
+
+<script>
+(function() {
+  const TERMS_PER_PAGE = 14;
+  let target = 0;
+  let page = 0;
+  let selectedIndices = []; // array of indices (0-based: 0->1, 1->-1/2, 2->1/3, ...)
+  let partialSum = 0;
+
+  const targetInput = document.getElementById('targetInput');
+
+  function formatTarget(n) {
+    return n.toFixed(4);
+  }
+
+  function parseTarget() {
+    const val = parseFloat(targetInput.value);
+    if (!isNaN(val) && isFinite(val)) {
+      target = val;
+      checkReveal();
+      renderPartialSum();
+    }
+  }
+
+  function rollTarget() {
+    // random between 0.4 and 1, with 4 decimal places
+    target = Math.round((Math.random() * 0.6 + 0.4) * 10000) / 10000;
+    targetInput.value = formatTarget(target);
+    checkReveal();
+    renderPartialSum();
+  }
+
+  function getTermValue(idx) {
+    // idx 0 -> +1, idx 1 -> -1/2, idx 2 -> +1/3, idx 3 -> -1/4, ...
+    const denom = idx + 1;
+    const sign = (idx % 2 === 0) ? 1 : -1;
+    return sign / denom;
+  }
+
+  function termLabel(idx) {
+    const denom = idx + 1;
+    const sign = (idx % 2 === 0) ? '' : '−';
+    return sign + '¹⁄' + denom;
+  }
+
+  function termLabelPlain(idx) {
+    const denom = idx + 1;
+    const sign = (idx % 2 === 0) ? '' : '-';
+    return sign + '1/' + denom;
+  }
+
+  function isUsed(idx) {
+    return selectedIndices.includes(idx);
+  }
+
+  function renderTermBank() {
+    const container = document.getElementById('termBank');
+    // Remove all term buttons (keep nav arrows)
+    container.querySelectorAll('.term-btn').forEach(el => el.remove());
+    const start = page * TERMS_PER_PAGE;
+    const end = start + TERMS_PER_PAGE;
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    for (let i = start; i < end; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'term-btn';
+      btn.textContent = termLabel(i);
+      if (i % 2 === 0) btn.classList.add('positive');
+      else btn.classList.add('negative');
+
+      if (isUsed(i)) {
+        btn.classList.add('used');
+        btn.title = 'Already used';
+      } else {
+        btn.title = 'Add ' + termLabelPlain(i);
+        btn.onclick = () => addTerm(i);
+      }
+      container.insertBefore(btn, nextBtn);
+    }
+    prevBtn.disabled = page === 0;
+    nextBtn.disabled = false; // always allow forward
+  }
+
+  function addTerm(idx) {
+    if (isUsed(idx)) return;
+    selectedIndices.push(idx);
+    partialSum += getTermValue(idx);
+    renderTermBank();
+    renderPartialSum();
+    checkReveal();
+  }
+
+  function removeTermAt(pos) {
+    const idx = selectedIndices[pos];
+    selectedIndices.splice(pos, 1);
+    partialSum -= getTermValue(idx);
+    renderTermBank();
+    renderPartialSum();
+    checkReveal();
+  }
+
+  function formatPartialValue(val) {
+    // show 8 decimal places with ellipses if needed
+    let s = val.toFixed(8);
+    // trim trailing zeros after decimal but keep at least one
+    s = s.replace(/0+$/, '');
+    if (s.endsWith('.')) s += '0';
+    return s;
+  }
+
+  function renderPartialSum() {
+    const disp = document.getElementById('partialSumDisplay');
+    const status = document.getElementById('statusIndicator');
+    if (selectedIndices.length === 0) {
+      disp.innerHTML = '<span class="empty">(no terms selected yet)</span>';
+      status.innerHTML = '';
+      return;
+    }
+
+    let html = '';
+    selectedIndices.forEach((idx, pos) => {
+      const val = getTermValue(idx);
+      const label = termLabelPlain(idx);
+      if (pos > 0) {
+        html += val >= 0
+          ? '<span class="op"> + </span>'
+          : '<span class="op"> − </span>';
+      }
+      // Show absolute value inside the box
+      const absLabel = val >= 0 ? label : label.replace(/^-/, '');
+      html += `<span class="selected-box" onclick="window._removeTerm(${pos})" title="Click to remove">${absLabel}</span>`;
+    });
+    html += '<span class="eq"> = </span>';
+    html += `<span class="value">${formatPartialValue(partialSum)}…</span>`;
+    disp.innerHTML = html;
+
+    const diff = partialSum - target;
+    if (Math.abs(diff) < 1e-9) {
+      status.innerHTML = '<span style="color:var(--accent)">Right on target!</span>';
+    } else if (diff < 0) {
+      status.innerHTML = '<span class="status-under">▼ Under target by ' + Math.abs(diff).toFixed(6) + '</span>';
+    } else {
+      status.innerHTML = '<span class="status-over">▲ Over target by ' + diff.toFixed(6) + '</span>';
+    }
+  }
+
+  // Expose remove function globally for onclick handlers
+  window._removeTerm = removeTermAt;
+
+  function checkReveal() {
+    const reveal = document.getElementById('revealBox');
+    if (selectedIndices.length < 12) {
+      reveal.classList.remove('visible');
+      return;
+    }
+
+    // We need at least 12 consecutive terms at the end that each follow the strategy.
+    // Strategy: when partial sum before adding the term was under target, term should be positive.
+    //           when partial sum before adding the term was over target, term should be negative.
+    // Then within those 12, there must be at least 3 positive and 3 negative terms.
+    // Actually, let's track the running partial sum *before* each term to determine correctness.
+
+    // Build array of { idx, value, sumBefore, sumAfter }
+    let running = 0;
+    const history = [];
+    for (const idx of selectedIndices) {
+      const val = getTermValue(idx);
+      const sumBefore = running;
+      running += val;
+      history.push({ idx, val, sumBefore, sumAfter: running });
+    }
+
+    // Find the longest suffix where each term follows the strategy
+    // A term follows strategy if:
+    //   sumBefore < target AND val > 0  (under -> add positive)
+    //   sumBefore > target AND val < 0  (over -> add negative)
+    // If sumBefore === target, either is acceptable but we require strict
+    function followsStrategy(h) {
+      if (Math.abs(h.sumBefore - target) < 1e-12) return true;
+      if (h.sumBefore < target && h.val > 0) return true;
+      if (h.sumBefore > target && h.val < 0) return true;
+      return false;
+    }
+
+    // Find longest consecutive suffix of strategy-following terms
+    let suffixLen = 0;
+    for (let i = history.length - 1; i >= 0; i--) {
+      if (followsStrategy(history[i])) {
+        suffixLen++;
+      } else {
+        break;
+      }
+    }
+
+    if (suffixLen < 12) {
+      reveal.classList.remove('visible');
+      return;
+    }
+
+    // Count positive and negative in that suffix
+    let posCount = 0, negCount = 0;
+    for (let i = history.length - suffixLen; i < history.length; i++) {
+      if (history[i].val > 0) posCount++;
+      else negCount++;
+    }
+
+    if (posCount >= 3 && negCount >= 3) {
+      reveal.classList.add('visible');
+    } else {
+      reveal.classList.remove('visible');
+    }
+  }
+
+  document.getElementById('rollBtn').addEventListener('click', rollTarget);
+  targetInput.addEventListener('input', parseTarget);
+  targetInput.addEventListener('change', parseTarget);
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    if (page > 0) { page--; renderTermBank(); }
+  });
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    page++; renderTermBank();
+  });
+
+  // Initialize
+  rollTarget();
+  renderTermBank();
+})();
+</script>
+</body>
+</html>
