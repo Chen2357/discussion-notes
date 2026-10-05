@@ -353,8 +353,12 @@
   }
 
   function rollTarget() {
-    // random between 0.4 and 1, with 4 decimal places
-    target = Math.round((Math.random() * 0.6 + 0.4) * 10000) / 10000;
+    // Pick from [0, 0.64] ∪ [0.75, 1.4], avoiding (0.64, 0.75) which is near ln(2)
+    const inFirst = Math.random() < 0.5;
+    const raw = inFirst
+      ? Math.random() * 0.64
+      : 0.75 + Math.random() * 0.65;
+    target = Math.round(raw * 10000) / 10000;
     targetInput.value = formatTarget(target);
     checkReveal();
     renderPartialSum();
