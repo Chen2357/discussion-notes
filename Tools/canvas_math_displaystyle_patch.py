@@ -17,7 +17,19 @@ Example:
           <mo lspace="0em">&sum;</mo>
           <mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle></math>
 
-The script is idempotent: running it twice does not double-wrap.
+In addition, every <mtable> opening tag whose class attribute contains the
+"multiline-equation" token (in practice usually
+class="multiline-equation aligned") is augmented with
+
+    columnalign="right left right left right left right left right left right left"
+    rowspacing="3pt"
+    columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em"
+
+unless the tag already carries any of columnalign, rowspacing, or
+columnspacing, so manually tuned values are never clobbered.
+
+The script is idempotent: running it twice does not double-wrap or double-
+annotate.
 
 Usage:
     python3 fix_math_displaystyle.py FILE [FILE ...] [--dry-run]
@@ -60,6 +72,30 @@ ALREADY_WRAPPED_RE = re.compile(
 WRAPPER_OPEN = '<mstyle scriptlevel="0" displaystyle="true">'
 WRAPPER_CLOSE = "</mstyle>"
 
+# <mtable ...> opening tag (case-insensitive).
+MTABLE_OPEN_RE = re.compile(r"<mtable\b[^>]*>", re.IGNORECASE)
+
+# The class attribute of an opening tag: double-quoted, single-quoted, or
+# unquoted. The lookbehind avoids matching a longer attribute name.
+CLASS_ATTR_RE = re.compile(
+    r"""(?<![-\w])class\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))""",
+    re.IGNORECASE,
+)
+
+# Any of the attributes this script adds, already present on the tag
+# (idempotency, and protection of manually tuned values).
+MTABLE_ATTR_PRESENT_RE = re.compile(
+    r"(?<![-\w])(?:columnalign|rowspacing|columnspacing)\s*=", re.IGNORECASE
+)
+
+MULTILINE_EQUATION_CLASS = "multiline-equation"
+
+MULTILINE_EQUATION_ATTRS = (
+    'columnalign="right left right left right left right left right left right left" '
+    'rowspacing="3pt" '
+    'columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em"'
+)
+
 HTML_EXTS = {".html", ".htm", ".xhtml"}
 
 USAGE = "usage: python3 fix_math_displaystyle.py [--dry-run] FILE [FILE ...]"
@@ -83,24 +119,54 @@ def transform_math(match: re.Match) -> str:
     return f"{open_tag}{WRAPPER_OPEN}{cleaned}{WRAPPER_CLOSE}{close_tag}"
 
 
+def transform_mtable(match: re.Match) -> str:
+    """Augment a <mtable ...> opening tag with the multiline-equation attrs."""
+    tag = match.group(0)
+    if MTABLE_ATTR_PRESENT_RE.search(tag):
+        return tag  # already annotated, or carries manual values: leave alone
+    class_match = CLASS_ATTR_RE.search(tag)
+    if not class_match:
+        return tag
+    classes = class_match.group(1) or class_match.group(2) or class_match.group(3)
+    if MULTILINE_EQUATION_CLASS not in classes.split():
+        return tag  # exact class token match; e.g. not "x-multiline-equation"
+    close = "/>" if tag.endswith("/>") else ">"
+    body = tag[: len(tag) - len(close)].rstrip()
+    return f"{body} {MULTILINE_EQUATION_ATTRS}{close}"
+
+
 def process_file(path: Path, dry_run: bool) -> None:
     text = path.read_text(encoding="utf-8")
-    changed = 0
+    changed = {"mtable": 0, "math": 0}
 
-    def repl(m: re.Match) -> str:
-        nonlocal changed
-        out = transform_math(m)
+    def mtable_repl(m: re.Match) -> str:
+        out = transform_mtable(m)
         if out != m.group(0):
-            changed += 1
+            changed["mtable"] += 1
         return out
 
-    new_text = MATH_RE.sub(repl, text)
-    if changed:
+    new_text = MTABLE_OPEN_RE.sub(mtable_repl, text)
+
+    def math_repl(m: re.Match) -> str:
+        out = transform_math(m)
+        if out != m.group(0):
+            changed["math"] += 1
+        return out
+
+    new_text = MATH_RE.sub(math_repl, new_text)
+
+    changed_parts = [
+        (f"{n} <mtable> element(s)" if kind == "mtable" else f"{n} <math> element(s)")
+        for kind, n in changed.items()
+        if n
+    ]
+    if changed_parts:
+        what = " and ".join(changed_parts)
         if dry_run:
-            print(f"{path}: would update {changed} <math> element(s)")
+            print(f"{path}: would update {what}")
         else:
             path.write_text(new_text, encoding="utf-8")
-            print(f"{path}: updated {changed} <math> element(s)")
+            print(f"{path}: updated {what}")
     else:
         print(f"{path}: no changes")
 
