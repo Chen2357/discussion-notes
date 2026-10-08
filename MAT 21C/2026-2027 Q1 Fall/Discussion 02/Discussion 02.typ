@@ -33,8 +33,8 @@
   $
     ln 2027 < sqrt(2027) < 2027^2 < 2^2027 < 3^2027 < 2027! < 2027^2027.
   $
-  Some intuition:
-  - $ln 2027 < sqrt(2027)$ because $ln 2027$ is less than $10$ ($2027$ is less than $e^10$) and $10$ is less than $sqrt(2027)$.
+  Some of my intuition:
+  - $ln 2027 < sqrt(2027)$ because $ln 2027$ is certainly less than $40$ ($2027$ is less than $e^40$) and $40$ is less than $sqrt(2027)$. Or make the plot of $ln x$ and $sqrt(x)$ and we will see that $ln x$ is always below $sqrt(x)$.
   - $sqrt(2027) < 2027^2$ because $sqrt(2027)$ is less than $2027$ and $2027$ is less than $2027^2$.
   - $2027^2 < 2^2027$ because exponential grows very fast, $2^(10) = 1024$.
   - $2^2027 < 3^2027$ because $2 < 3$.
@@ -66,7 +66,7 @@ The limit comparison test states that
 #theorem[
   #set enum(spacing: 1.5em)
   If $a_n >= 0$ and $b_n >= 0$ are nonnegative terms, then
-  + If $display(lim_(n -> oo) (a_n)/(b_n) = c)$, then $display(sum a_n)$ and $display(sum b_n)$ either both converge or both diverge.
+  + If $display(lim_(n -> oo) (a_n)/(b_n) = c)$ and $0 < c < oo$, then $display(sum a_n)$ and $display(sum b_n)$ either both converge or both diverge.
   + If $a_n << b_n$, then the convergence of $display(sum b_n)$ implies the convergence of $display(sum a_n)$ and the divergence of $display(sum a_n)$ implies the divergence of $display(sum b_n)$.
     It is as if
     $
@@ -87,11 +87,13 @@ $
   lim_(n -> oo) (ln n)/n =^("LH") lim_(n -> oo) (1/n)/1 = 0.
 $
 
-Before we move on to exercises, let us note that
-$
-  "constant" << ln n << dots.c << n^(1/3) << n^(1/2) << n << n^2 << n^3 << dots.c << e^n << n! << n^n.
-$
-Remembering this will help us identify the fastest growing terms in the numerator and denominator of a series.
+#tip[
+  Before we move on to exercises, let us note that
+  $
+    "constant" << ln n << dots.c << n^(1/3) << n^(1/2) << n << n^2 << n^3 << dots.c << e^n << n! << n^n.
+  $
+  Remembering this will help us identify the fastest growing terms in the numerator and denominator of a series.
+]
 
 #exercise[
   #set enum(spacing: 1.5em)
@@ -107,6 +109,14 @@ Remembering this will help us identify the fastest growing terms in the numerato
       lim_(n -> oo) (2^n + 5)/(3^n) dot.c (3^n)/(2^n) = lim_(n -> oo) (1 + 5/(2^n)) = 1.
     $
     Since $sum_(n=1)^(oo) (2^n)/(3^n)$ is a convergent geometric series, we conclude that $sum_(n=1)^(oo) (2^n + 5)/(3^n)$ converges.
+    #tip[
+      This problem can be more easily solved by splitting the series into two parts.
+      This is mistake in problem design on my part.
+      A better problem is perhaps
+      $
+        sum_(n=1)^(oo) (2^n + 5)/(3^n - 2^n).
+      $
+    ]
   + For large $n$, $1$ is negligible compared to $n^2$, so we will compare to $sum_(n=2)^(oo) 1/(n sqrt(n^2)) = sum_(n=2)^(oo) 1/(n^2)$.
     We have
     $
@@ -160,11 +170,14 @@ $
   lim_(n -> oo) abs(a_n)^(1/n) = lim_(n -> oo) (n^(7\/n))/(n) = lim_(n -> oo) ((n^(1\/n))^7)/(n) = 0 < 1.
 $
 Similar to the ratio test, a limit of less than $1$ implies convergence, a limit greater than $1$ implies divergence, and a limit equal to $1$ is inconclusive.
-An identity that is worth remembering for the root test is that
-$
-  lim_(n -> oo) n^(1\/n) = 1,
-$
-which we used in the previous example.
+
+#tip[
+  An identity that is worth remembering for the root test is that
+  $
+    lim_(n -> oo) n^(1\/n) = 1,
+  $
+  which we used in the previous example.
+]
 
 #exercise[
   #set enum(spacing: 1.5em)
