@@ -113,7 +113,7 @@ So if our conclusion is conditional convergence, we better have applied the alte
   $
   where $a_n$ are positive numbers.
   If $a_1, a_2, a_3, ...$ is a sequence that
-  - is decreasing, and
+  - is decreasing (eventually), and
   - converges to $0$,
   then the alternating series above converges either absolutely or conditionally.
 
@@ -133,8 +133,8 @@ So if our conclusion is conditional convergence, we better have applied the alte
   #set enum(spacing: 2em)
   Determine whether the series converges absolutely, converges conditionally, or diverges.
   + $display(1/sqrt(2) - 1/sqrt(3) + 1/sqrt(4) - 1/sqrt(5) + dots.c)$
-  + $display(sum_(n = 1)^oo (-1)^(n) (n + 1)/(2n))$
-  + $display(sum_(n = 1)^oo (-1)^(n) cos(pi n)/(n!))$
+  + $display(sum_(n = 1)^oo (-1)^(n + 1) (n + 1)/(n^2))$
+  + $display(sum_(n = 1)^oo (-1)^(n) cos(pi n)/(n))$
 ]
 #solution[
   + It is obviously alternating and the magnitude of the terms $1/sqrt(2), 1/sqrt(3), 1/sqrt(4), ...$ is
@@ -150,29 +150,36 @@ So if our conclusion is conditional convergence, we better have applied the alte
     So the original series only converges conditionally.
   + The series
     $
-      sum_(n = 1)^oo (-1)^(n) (n + 1)/(2n) = -2/2 + 3/4 - 4/6 + 5/8 - 6/10 + dots.c
+      sum_(n = 1)^oo (-1)^(n + 1) (n + 1)/(n^2) = 2/1 - 3/4 + 4/9 - 5/16 + 6/25 - 7/36 + dots.c
     $
-    is alternating (we can also know without writing it out by noting that $(n + 1)/(2n)$ is positive), but since
+    is alternating (algebraically, we can say that $(-1)^(n + 1)$ is alternating and $(n+1)/(n^2)$ is positive, so them multiplied is alternating).
+    Now we check that $(n+1)/(n^2)$ is decreasing and converging to $0$.
+    - Because the numerator and the denominator are both increasing, it is not obvious that the fraction is decreasing.
+      We need to find the derivative of the function $f(x) = (x + 1)/(x^2)$.
+      We have
+      $
+        f'(x) = (x^2 - 2x (x + 1))/(x^4) = (-x^2 - 2x)/(x^4) < 0
+      $
+      for $x > 0$ (the $0$ is not important here), so $f(x)$ is decreasing for $x > 0$ and thus $(n + 1)/(n^2)$ is decreasing.
+    - The sequence $(n + 1)/(n^2)$ converges to $0$ because
+      $
+        lim_(n -> oo) (n + 1)/(n^2) = lim_(n -> oo) (1/n + 1/n^2) = 0.
+      $
+      the series diverges.
+    The series of absolute values diverges by the limit comparison test with $sum 1/n$ because
     $
-      lim_(n -> oo) (n + 1)/(2n) = lim_(n -> oo) n/n (1 + 1/n)/2 = 1/2 != 0,
+      lim_(n -> oo) ((n + 1)/(n^2)) dot.c n/1 = lim_(n -> oo) (1 + 1/n) = 1
     $
-    the series diverges.
+    and $sum 1/n$ diverges by the $p$-series test with $p = 1$.
+    Therefore, the original series converges conditionally.
   + The series
     $
-      sum_(n = 1)^oo (-1)^(n) cos(pi n)/(n!) & = -(-1)/(1!) + 1/(2!) - (-1)/(3!) + 1/(4!) - (-1)/(5!) + dots.c
+      sum_(n = 1)^oo (-1)^(n) cos(pi n)/(n) & = -(-1)/(1) + 1/(2) - (-1)/(3) + 1/(4) - (-1)/(5) + dots.c
       \
-      & = 1/(1!) + 1/(2!) + 1/(3!) + 1/(4!) + 1/(5!) + dots.c
+      & = 1/(1) + 1/(2) + 1/(3) + 1/(4) + 1/(5) + dots.c
     $
-    is actually not alternating.
-    Do not be misled by $(-1)^n$, it does not share the pattern for alternating series because $cos(pi n)/(n!)$ is not positive.
-    Now, the series
-    $
-      1/(1!) + 1/(2!) + 1/(3!) + 1/(4!) + 1/(5!) + dots.c = sum_(n = 1)^oo 1/(n!)
-    $
-    converges absolutely by the ratio test because
-    $
-      lim_(n -> oo) abs(1/((n + 1)!) dot.c n!/1) = lim_(n -> oo) 1/(n + 1) = 0 < 1.
-    $
+    is actually not alternating and is divergent.
+   Both $(-1)^n$ and $cos(pi n)/n$ are alternating, and the product of two alternating sequences will always be not alternating.
 ]
 
 = Story Time: Taylor Series
