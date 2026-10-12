@@ -177,6 +177,18 @@ Similar to the ratio test, a limit of less than $1$ implies convergence, a limit
     lim_(n -> oo) n^(1\/n) = 1,
   $
   which we used in the previous example.
+
+  If you want to join the root test fan club, you need to know that
+  $
+    lim_(n -> oo) ("polynomial in" n)^(1/n) = 1
+  $
+  and you need know that the trick to show this is to apply the identity $x = e^(ln x)$ and its byproduct $x^y = e^(y ln x)$, so we have
+  $
+    lim_(n -> oo) ("polynomial in" n)^(1/n) = lim_(n -> oo) e^(1/n ln ("polynomial in" n)).
+  $
+  From here, we can apply L'Hôpital's rule to show that the limit is $1$.
+
+  Try this for $n^(1/n)$ and for $(n^2 + 1)^(1/n)$.
 ]
 
 #exercise[
