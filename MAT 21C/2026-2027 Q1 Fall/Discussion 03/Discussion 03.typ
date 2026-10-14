@@ -161,6 +161,14 @@ So if our conclusion is conditional convergence, we better have applied the alte
         f'(x) = (x^2 - 2x (x + 1))/(x^4) = (-x^2 - 2x)/(x^4) < 0
       $
       for $x > 0$ (the $0$ is not important here), so $f(x)$ is decreasing for $x > 0$ and thus $(n + 1)/(n^2)$ is decreasing.
+      #tip[
+        Taking derivatives is the most universal way for checking whether a sequence is decreasing, but there can be clever ways to check as well.
+        For this sequence, we can also say
+        $
+          (n + 1)/(n^2) = 1/n + 1/(n^2),
+        $
+        and since $1/n$ and $1/(n^2)$ are both decreasing, their sum is also decreasing.
+      ]
     - The sequence $(n + 1)/(n^2)$ converges to $0$ because
       $
         lim_(n -> oo) (n + 1)/(n^2) = lim_(n -> oo) (1/n + 1/n^2) = 0.
