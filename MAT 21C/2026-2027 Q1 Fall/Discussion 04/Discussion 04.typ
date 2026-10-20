@@ -18,7 +18,7 @@
     "River string.svg" : "32222849",
     "River.svg" : "32222850",
     "Taylor series bait.svg" : "32222851",
-    "Upper bound.svg" : "32222852",
+    "Upper bound.svg" : "32232192",
     "Vector addition.svg" : "32222854",
     "Vector scaling.svg" : "32222855",
     "Vector subtraction.svg" : "32222856",
@@ -94,6 +94,7 @@ Taylor's formula tells us the condition for when a function has this nice proper
     f(x) = f(0) + f'(0) x + f''(0) x^2 / 2! + f^((3)) (0) x^3 / 3! + dots.c,
   $
   finally establishing the relationship between the function and its Taylor series.
+  Be careful that $M$ is not always a constant, it can depend on $n$ and $x$, so the limit $lim_(n -> oo) M abs(x)^(n+1) / (n+1)!$ might not be zero.
 ]
 
 As an example, the Taylor series of $f(x) = e^x$ is

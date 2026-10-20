@@ -17,8 +17,9 @@
   let mark = line.with(stroke: 0.5pt + gray)
 
   axis((a, 0), (x + 0.2, 0))
-  content((), anchor: "west", padding: (left: 5pt))[#text(gray)[$t$]]
+  content((), anchor: "west", padding: (left: 2pt))[#text(gray)[$c$]]
   axis((a, 0), (a, 1.5))
+  content((), anchor: "east", padding: (right: 3pt))[#text(gray)[$y$]]
   mark((a, 0.05), (a, -0.05))
   content((), anchor: "north", padding: (top: 2pt))[#text(gray)[$0$]]
   mark((x, 0.05), (x, -0.05))
