@@ -224,8 +224,8 @@ Let $f(x) = ln(1 + x)$ and $p(x) = x - x^2/2 + x^3/3 - x^4/4 + x^5/5 - x^6/6 + d
     p'(x) = 1 - x + x^2 - x^3 + x^4 - x^5 + dots.c = 1/(1 + x)
   $
   for $-1 < x < 1$ (geometric series).
-  So of course, we have $f'(0) = p'(0)$ because $f'(x) = T'(x)$ agrees for all $-1 < x < 1$.
-- The argument actually shortens for higher order derivatives because $f'(x) = T'(x)$ implies $f''(x) = T''(x)$, $f'''(x) = T'''(x)$, $f^((4)) (x) = T^((4)) (x)$, and so on.
+  So of course, we have $f'(0) = p'(0)$ because $f'(x) = p'(x)$ agrees for all $-1 < x < 1$.
+- The argument actually shortens for higher order derivatives because $f'(x) = p'(x)$ implies $f''(x) = p''(x)$, $f'''(x) = p'''(x)$, $f^((4)) (x) = p^((4)) (x)$, and so on.
 
 Because for a general power series of the form
 $
