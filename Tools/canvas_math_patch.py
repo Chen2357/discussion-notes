@@ -62,6 +62,7 @@ skipped with a notice.
 from __future__ import annotations
 
 import argparse
+from os import PathLike
 import re
 import sys
 from dataclasses import dataclass
