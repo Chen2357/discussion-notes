@@ -2,12 +2,12 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Fix MathML displaystyle for Canvas (current HTML file)",
-            "detail": "Wraps the content of <math> elements in <mstyle scriptlevel=\"0\" displaystyle=\"true\"> when a descendant has displaystyle=\"true\", and removes the redundant attributes. Run with the HTML file active in the editor (save it first).",
+            "label": "Patch MathML for Canvas (current HTML file)",
+            "detail": "Applies the MathML patches for Canvas to the active HTML file, all features on by default: wraps the content of <math> elements in <mstyle scriptlevel=\"0\" displaystyle=\"true\"> when a descendant has displaystyle=\"true\" and removes the redundant attributes, annotates <mtable class=\"...multiline-equation...\"> tags with alignment attributes, and rewrites vector arrows (⃗) as stretchy=\"false\". Run with the HTML file active in the editor (save it first); add arguments such as --features arrow to apply only a subset, or --dry-run to preview changes.",
             "type": "shell",
             "command": "python3",
             "args": [
-                "${workspaceFolder}/Tools/canvas_math_displaystyle_patch.py",
+                "${workspaceFolder}/Tools/canvas_math_patch.py",
                 "${file}"
             ],
             "options": {
