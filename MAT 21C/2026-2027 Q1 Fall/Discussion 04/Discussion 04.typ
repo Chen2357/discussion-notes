@@ -224,7 +224,7 @@ which is true because $lim_(n -> oo) x^n \/ n! = 0$ for all $x$ (which is on our
   )
 
   I think this is a extremely clever solution!
-  It is so clever that I simaultaneously love it and am jealous of it.
+  It is so clever that I simultaneously love it and am jealous of it.
   I don't think I could have come up with it myself.
   Luckily for me, mathematicians have developed the so-called *Lagrange multipliers* to solve this kind of optimization problems under constraints, and the perk is that it reveals just as much geometric insight and can be applied to a much wider range of problems.
 
