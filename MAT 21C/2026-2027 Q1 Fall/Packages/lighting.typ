@@ -59,6 +59,13 @@
   return cetz.draw.set-transform(transformation)
 }
 
+// Draw on the plane facing the camera with the origin of the plane placed at the parameter `origin` (a 3D coordinate).
+// Example usage:
+// on-perspective((1, 0, 0), {
+//   circle((0, 0), radius: 3pt, stroke: none, fill: gray)
+// })
+// draws a circle on the plane facing the camera, with the center of the circle at (1, 0, 0) in 3D space.
+// We can use this technique to simulate drawing a sphere.
 #let on-perspective(origin, body) = {
   import cetz.draw: *
   scope({
