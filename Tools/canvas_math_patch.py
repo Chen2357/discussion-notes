@@ -142,6 +142,7 @@ MULTILINE_EQUATION_ATTRS = (
     'columnalign="right left right left right left right left right left right left" '
     'rowspacing="3pt" '
     'columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em"'
+    'displaystyle="true"'
 )
 
 
