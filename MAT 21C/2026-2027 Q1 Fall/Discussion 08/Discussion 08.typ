@@ -15,6 +15,7 @@
   course-id: "1103419",
   image-ids: (
     "Contours.svg" : "32623910",
+    "Mountain 3D.svg" : "32627669",
     "Mountain solution.svg" : "32623931",
     "Mountain.svg" : "32623912",
     "Paraboloid.svg" : "32623913",
@@ -35,7 +36,7 @@
 
 = Warm-Up
 
-#exercise[
+#exercise(label: [Warm-up])[
   As we discussed in the previous discussion, we can compose a curve with a function $f(x, y)$ to get a single-variable function.
   In particular, when the curve is a straight line, the resulting single-variable function can be seen as the intersection of the graph of $f(x, y)$ with a vertical plane.
   #figure(
@@ -71,6 +72,18 @@
       The single-variable function that is the composition of the curve and the function $f(x, y)$ shown in the previous figure.
     ]
   ) <fig:mountain-solution>
+
+  Here is the 3D view.
+  #figure(
+    image(
+      "Mountain 3D.svg",
+      width: 40%,
+      alt: "The graph of a hill. Point A is at the bottom left. A line along the hill is drawn through point A, and it looks like the previous figure.",
+    ),
+    caption: [
+      The 3D view of the hill.
+    ]
+  )
 ]
 
 = Partial Derivatives
@@ -156,10 +169,10 @@ Putting these together, we have
 $
   dv(z, t) = pdv(z, x) dv(x, t) + pdv(z, y) dv(y, t) = y (-sin t) + x (cos t) = cos^(2) t - sin^(2) t.
 $
-This is exactly the same result when we were doing the exercise about composing curve $arrow(r) = (cos t, sin t)$ with the function $f(x, y) = x y$ in discussion 7.
+This is exactly the same result when we were doing the exercise about composing curve $arrow(r) (t) = (cos t, sin t)$ with the function $f(x, y) = x y$ in discussion 7.
 We first substituted
 $
-  z = f(arrow(r)) = f(cos t, sin t) = cos t sin t
+  z = f(arrow(r) (t)) = f(cos t, sin t) = cos t sin t
 $
 and then computed the derivative
 $
